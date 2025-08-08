@@ -125,17 +125,17 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  // داده‌های اولیه محصولات (مثال)
   let products = [
     {id: 1, title: "کرم مرطوب‌کننده", price: "۲۵۰,۰۰۰ تومان", image: "https://cdn.pixabay.com/photo/2016/03/27/21/17/cosmetics-1284258_1280.jpg"},
     {id: 2, title: "رژ لب مایع مات", price: "۱۵۰,۰۰۰ تومان", image: "https://cdn.pixabay.com/photo/2018/03/06/22/20/lipstick-3209793_1280.jpg"},
     {id: 3, title: "سرم ویتامین C", price: "۳۲۰,۰۰۰ تومان", image: "https://cdn.pixabay.com/photo/2017/07/10/19/02/serum-2497527_1280.jpg"},
+    {id: 4, title: "ادو پرفیوم زنانه", price: "۴۰۰,۰۰۰ تومان", image: "https://cdn.pixabay.com/photo/2016/11/18/16/40/perfume-1835611_1280.jpg"},
+    {id: 5, title: "ماسک صورت", price: "۱۸۰,۰۰۰ تومان", image: "https://cdn.pixabay.com/photo/2017/12/10/14/47/facial-mask-3015523_1280.jpg"},
+    {id: 6, title: "لاک ناخن رنگی", price: "۹۰,۰۰۰ تومان", image: "https://cdn.pixabay.com/photo/2016/03/23/20/26/nail-polish-1274889_1280.jpg"},
   ];
 
-  // سفارش‌ها (آغاز خالی)
   let orders = [];
 
-  // المان‌ها
   const productList = document.getElementById("productList");
   const manageProductList = document.getElementById("manageProductList");
   const manageOrderList = document.getElementById("manageOrderList");
@@ -148,7 +148,7 @@
   const adminBtn = document.getElementById("adminBtn");
   const logoutBtn = document.getElementById("logoutBtn");
 
-  // تابع نمایش محصولات در صفحه فروشگاه
+  // نمایش محصولات
   function showProducts() {
     productList.innerHTML = "";
     products.forEach(p => {
@@ -165,7 +165,6 @@
         </div>`;
       productList.appendChild(div);
     });
-    // وصل کردن رویداد کلیک خرید
     document.querySelectorAll(".buyBtn").forEach(btn => {
       btn.onclick = e => {
         const id = parseInt(e.target.dataset.id);
@@ -174,29 +173,94 @@
     });
   }
 
-  // اضافه کردن سفارش (با فرم ساده و ذخیره در orders)
+  // فرم سفارش مودال و هدایت به زرین پال
   function addOrder(productId) {
     const product = products.find(p => p.id === productId);
     if(!product) return alert("محصول یافت نشد");
-    const name = prompt("نام شما:");
-    if(!name) return alert("نام را وارد کنید");
-    const phone = prompt("شماره تماس:");
-    if(!phone) return alert("شماره تماس را وارد کنید");
-    const address = prompt("آدرس:");
-    if(!address) return alert("آدرس را وارد کنید");
-    const postal = prompt("کد پستی:");
-    if(!postal) return alert("کد پستی را وارد کنید");
-    orders.push({
-      id: Date.now(),
-      productTitle: product.title,
-      price: product.price,
-      name, phone, address, postal
+
+    const modalHtml = `
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true" dir="rtl">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderModalLabel">ثبت سفارش - ${product.title}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+          </div>
+          <div class="modal-body">
+            <form id="orderForm">
+              <div class="mb-3">
+                <label for="customerName" class="form-label">نام و نام خانوادگی</label>
+                <input type="text" class="form-control" id="customerName" required />
+              </div>
+              <div class="mb-3">
+                <label for="customerPhone" class="form-label">شماره تماس</label>
+                <input type="tel" class="form-control" id="customerPhone" required pattern="^[0-9]{10,15}$" title="فقط اعداد وارد کنید" />
+              </div>
+              <div class="mb-3">
+                <label for="customerAddress" class="form-label">آدرس کامل</label>
+                <textarea class="form-control" id="customerAddress" rows="2" required></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="customerPostal" class="form-label">کد پستی</label>
+                <input type="text" class="form-control" id="customerPostal" required pattern="^[0-9]{10}$" title="کد پستی باید ۱۰ رقم باشد" />
+              </div>
+              <button type="submit" class="btn btn-success w-100">ثبت سفارش و پرداخت</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+    document.body.insertAdjacentHTML("beforeend", modalHtml);
+    const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+    orderModal.show();
+
+    document.getElementById("orderForm").onsubmit = function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("customerName").value.trim();
+      const phone = document.getElementById("customerPhone").value.trim();
+      const address = document.getElementById("customerAddress").value.trim();
+      const postal = document.getElementById("customerPostal").value.trim();
+
+      if(name.length < 3) return alert("نام باید حداقل ۳ حرف باشد.");
+      if(!/^[0-9]{10,15}$/.test(phone)) return alert("شماره تماس معتبر نیست.");
+      if(address.length < 5) return alert("آدرس کامل را وارد کنید.");
+      if(!/^[0-9]{10}$/.test(postal)) return alert("کد پستی باید ۱۰ رقم باشد.");
+
+      orders.push({
+        id: Date.now(),
+        productId,
+        productTitle: product.title,
+        price: product.price,
+        name,
+        phone,
+        address,
+        postal
+      });
+
+      alert("سفارش شما ثبت شد. شما به صفحه پرداخت منتقل می‌شوید.");
+
+      orderModal.hide();
+      document.getElementById('orderModal').remove();
+
+      // هدایت به صفحه پرداخت زرین پال - لطفا merchant_id خود را جایگزین کنید
+      const merchant_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; // این مقدار را با کد مرچنت زرین پال جایگزین کنید
+      const amount = product.price.replace(/[^0-9]/g, ""); // فقط اعداد قیمت
+      const description = encodeURIComponent(`خرید محصول ${product.title} از نوژشاپ`);
+
+      // درگاه زرین پال آنلاین
+      const paymentUrl = `https://www.zarinpal.com/pg/StartPay/${merchant_id}?amount=${amount}&description=${description}`;
+
+      window.open(paymentUrl, "_blank");
+    };
+
+    document.getElementById('orderModal').addEventListener('hidden.bs.modal', function () {
+      document.getElementById('orderModal').remove();
     });
-    alert("سفارش شما ثبت شد. بعد از بررسی با شما تماس می‌گیریم.");
-    if(adminPanel.style.display === "block") renderOrders();
   }
 
-  // نمایش سفارشات در پنل مدیریت
+  // نمایش سفارشات پنل مدیریت
   function renderOrders() {
     if(orders.length === 0) {
       manageOrderList.innerHTML = "<li class='list-group-item text-center'>سفارشی ثبت نشده</li>";
@@ -216,7 +280,7 @@
       `;
       manageOrderList.appendChild(li);
     });
-    // حذف سفارش
+
     document.querySelectorAll(".deleteOrderBtn").forEach(btn => {
       btn.onclick = e => {
         const id = parseInt(e.target.dataset.id);
@@ -227,7 +291,7 @@
     });
   }
 
-  // نمایش محصولات در پنل مدیریت با قابلیت حذف و ویرایش عنوان و قیمت
+  // نمایش و مدیریت محصولات در پنل مدیریت
   function renderManageProducts() {
     if(products.length === 0) {
       manageProductList.innerHTML = "<li class='list-group-item text-center'>محصولی وجود ندارد</li>";
@@ -248,7 +312,6 @@
       manageProductList.appendChild(li);
     });
 
-    // اضافه کردن رویداد حذف محصول
     document.querySelectorAll(".deleteProductBtn").forEach(btn => {
       btn.onclick = e => {
         const id = parseInt(e.target.dataset.id);
@@ -259,7 +322,6 @@
       };
     });
 
-    // اضافه کردن رویداد تغییر عنوان و قیمت و عکس (با کمی تأخیر یا روی خروج از فیلد)
     document.querySelectorAll(".productTitleInput").forEach(input => {
       input.onchange = e => {
         const id = parseInt(e.target.dataset.id);
@@ -268,83 +330,3 @@
           p.title = e.target.value;
           showProducts();
         }
-      };
-    });
-    document.querySelectorAll(".productPriceInput").forEach(input => {
-      input.onchange = e => {
-        const id = parseInt(e.target.dataset.id);
-        const p = products.find(p => p.id === id);
-        if(p) {
-          p.price = e.target.value;
-          showProducts();
-        }
-      };
-    });
-    document.querySelectorAll(".productImageInput").forEach(input => {
-      input.onchange = e => {
-        const id = parseInt(e.target.dataset.id);
-        const p = products.find(p => p.id === id);
-        if(p) {
-          p.image = e.target.value;
-          showProducts();
-        }
-      };
-    });
-  }
-
-  // افزودن محصول جدید از فرم
-  document.getElementById("addProductBtn").onclick = () => {
-    const title = document.getElementById("newTitle").value.trim();
-    const price = document.getElementById("newPrice").value.trim();
-    const image = document.getElementById("newImage").value.trim();
-    if(!title || !price || !image) {
-      alert("لطفا همه فیلدها را پر کنید.");
-      return;
-    }
-    const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-    products.push({id: newId, title, price, image});
-    renderManageProducts();
-    showProducts();
-    document.getElementById("newTitle").value = "";
-    document.getElementById("newPrice").value = "";
-    document.getElementById("newImage").value = "";
-  };
-
-  // ورود به پنل مدیریت با رمز عبور
-  loginBtn.onclick = () => {
-    const pass = adminPasswordInput.value;
-    if(pass === "1225") {
-      loginPanel.style.display = "none";
-      adminPanel.style.display = "block";
-      ordersSection.style.display = "block";
-      renderManageProducts();
-      renderOrders();
-      loginError.style.display = "none";
-    } else {
-      loginError.style.display = "block";
-    }
-  };
-
-  // باز کردن پنل مدیریت با کلیک روی لینک
-  adminBtn.onclick = (e) => {
-    e.preventDefault();
-    loginPanel.style.display = "block";
-    adminPanel.style.display = "none";
-    ordersSection.style.display = "none";
-  };
-
-  // خروج از مدیریت
-  logoutBtn.onclick = () => {
-    loginPanel.style.display = "block";
-    adminPanel.style.display = "none";
-    ordersSection.style.display = "none";
-    adminPasswordInput.value = "";
-  };
-
-  // شروع نمایش محصولات در صفحه فروشگاه
-  showProducts();
-
-</script>
-
-</body>
-</html>
