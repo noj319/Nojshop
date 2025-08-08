@@ -1,83 +1,435 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>نوژشاپ - فروشگاه لوازم آرایشی و بهداشتی</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
-  <style>
-    body { background: #f9f9fb; font-family: "Tahoma", sans-serif; margin:0; padding:0; }
-    header { background-color: #d63384; color: white; padding: 1rem 0; position: relative; text-align: center; }
-    .product-img { height: 200px; object-fit: cover; border-radius: 10px; }
-    .hamburger-menu { position: absolute; top: 15px; left: 15px; cursor: pointer; width: 30px; height: 22px; z-index: 1100; }
-    .hamburger-menu div { background-color: white; height: 4px; margin:4px 0; border-radius:2px; transition:0.4s; }
-    .menu-dropdown { display:none; position:absolute; top:50px; left:15px; background:white; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); min-width:160px; z-index:1099; }
-    .menu-dropdown.show { display:block; }
-    .menu-dropdown button { width:100%; padding:10px 16px; border:none; background:none; text-align:right; font-size:1rem; color:#d63384; cursor:pointer; border-bottom:1px solid #eee; }
-    .menu-dropdown button:last-child { border-bottom:none; }
-    .menu-dropdown button:hover { background-color:#fce4ec; }
-    #welcome-text { background:white; max-width:700px; margin:2rem auto; padding:1.5rem 1rem; border-radius:12px; box-shadow:0 0 10px rgba(214,51,132,0.3); color:#444; font-size:1.1rem; line-height:1.5; text-align:center; }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>نوژشاپ — فروشگاه لوازم آرایشی و بهداشتی</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+<style>
+  :root{--brand:#d63384}
+  body{font-family:Tahoma, sans-serif;background:#f9f9fb;min-height:100vh;margin:0;padding-bottom:80px}
+  header{background:var(--brand);color:#fff;padding:1rem 1rem;position:relative}
+  header h1{margin:0;font-size:1.5rem}
+  header p{margin:0.25rem 0 0;font-size:0.95rem}
+  /* hamburger */
+  .hamburger{position:absolute;left:14px;top:14px;width:34px;height:26px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;z-index:1200}
+  .hamburger span{display:block;height:4px;background:#fff;border-radius:3px}
+  .menu-dropdown{position:absolute;left:14px;top:56px;background:#fff;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.15);display:none;min-width:180px;z-index:1199}
+  .menu-dropdown.show{display:block}
+  .menu-dropdown button{width:100%;padding:.6rem 1rem;border:none;background:transparent;text-align:right;color:var(--brand);font-weight:600;cursor:pointer}
+  .menu-dropdown button:hover{background:#fde6f2}
+  /* welcome */
+  #welcome{background:#fff;max-width:900px;margin:22px auto;padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(214,51,132,0.12);text-align:center}
+  /* products */
+  .product-img{height:200px;object-fit:cover;border-radius:10px}
+  .card .card-body{padding:12px}
+  /* add product form */
+  .admin-panel{max-width:900px;margin:18px auto;padding:14px;background:#fff;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+  /* footer */
+  footer{background:var(--brand);color:#fff;padding:18px 10px;text-align:center;position:fixed;left:0;right:0;bottom:0}
+  .trust-logo{height:44px;margin-bottom:6px}
+  /* modal */
+  .order-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);z-index:1300}
+  .order-modal.show{display:flex}
+  .order-card{background:#fff;border-radius:10px;padding:18px;max-width:420px;width:94%;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+  /* orders list */
+  .orders-list{max-width:900px;margin:18px auto;padding:14px;background:#fff;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+  @media (max-width:700px){ .product-img{height:160px} header h1{font-size:1.2rem} }
+</style>
 </head>
 <body>
 
-<header>
-  <h1>نوژشاپ</h1>
-  <p>فروشگاه آنلاین لوازم آرایشی و بهداشتی</p>
-  <div class="hamburger-menu" id="hamburger-menu"><div></div><div></div><div></div></div>
-  <div class="menu-dropdown" id="menu-dropdown">
-    <button id="menu-products">محصولات</button>
-    <button id="menu-order">ثبت سفارش</button>
-    <button id="menu-contact">تماس با ما</button>
+<header class="text-center">
+  <div class="hamburger" id="hamburger" aria-label="منوی سایت" role="button" tabindex="0">
+    <span></span><span></span><span></span>
   </div>
+
+  <div class="menu-dropdown" id="dropdownMenu" role="menu" aria-hidden="true">
+    <button id="menuhome">صفحه اصلی</button>
+    <button id="menuproducts">محصولات</button>
+    <button id="menuorders">سفارشات</button>
+    <button id="menucontact">تماس با ما</button>
+  </div>
+
+  <h1>نوژشاپ</h1>
+  <p>فروشگاه آنلاین لوازم آرایشی و بهداشتی — محصولات با کیفیت، ارسال سریع</p>
 </header>
 
-<div id="welcome-text">
-  <p>دوست عزیز، توی نوژشاپ تلاش کردیم بهترین و باکیفیت‌ترین محصولات آرایشی و بهداشتی رو براتون فراهم کنیم.  
-  هر محصول رو با دقت انتخاب کردیم تا شما با خیال راحت زیبایی و سلامت رو تجربه کنید.  
-  هدف ما فقط فروش نیست، بلکه ایجاد یک تجربه صمیمانه و دلنشین خرید برای شماست.  
-  از اینکه به ما اعتماد می‌کنید بی‌نهایت ممنونیم و همیشه کنار شما هستیم!</p>
-</div>
+<main>
 
-<div class="container">
-  <ul class="nav nav-tabs justify-content-center" id="mainTabs" role="tablist">
-    <li class="nav-item"><button class="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products">محصولات</button></li>
-    <li class="nav-item"><button class="nav-link" id="order-tab" data-bs-toggle="tab" data-bs-target="#order">فرم سفارش</button></li>
-    <li class="nav-item"><button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders-list">سفارش‌ها</button></li>
-  </ul>
-  <div class="tab-content pt-3">
-    <div class="tab-pane fade show active" id="products">
-      <div class="row g-4">
-        <div class="col-md-4"><div class="card"><img src="https://image.freepik.com/free-photo/close-up-nail-polish-bottle-drop-white-background_124788943.jpg" class="card-img-top product-img" alt="لاک ناخن رنگی"><div class="card-body text-center"><h5>لاک ناخن رنگی</h5><p class="text-danger fw-bold">۹۰,۰۰۰ تومان</p><button class="btn btn-danger buy-btn" data-product="لاک ناخن رنگی" data-price="90000">خرید</button></div></div></div>
-        <div class="col-md-4"><div class="card"><img src="https://image.alamy.com/closing-white-cream-jar-on-white-background-hd-image266320562.html" class="card-img-top product-img" alt="کرم مرطوب‌کننده"><div class="card-body text-center"><h5>کرم مرطوب‌کننده</h5><p class="text-danger fw-bold">۲۵۰,۰۰۰ تومان</p><button class="btn btn-danger buy-btn" data-product="کرم مرطوب‌کننده" data-price="250000">خرید</button></div></div></div>
-        <!-- باقی محصولات میمونن placeholder -->
+  <!-- welcome / friendly text -->
+  <div id="welcome">
+    <strong>دوست عزیز، خوش آمدی!</strong>
+    <p style="margin:.6rem 0 0;color:#444;line-height:1.6">
+      در نوژشاپ بهترین و باکیفیت‌ترین محصولات آرایشی و بهداشتی را با دقت انتخاب می‌کنیم تا تجربه خریدی صمیمی و مطمئن داشته باشید.  
+      اگر هر محصولی را دوست نداشتید، راحت حذف یا جایگزینش کن — همه چیز در اختیار شماست.
+    </p>
+  </div>
+
+  <div class="container">
+
+    <!-- tabs -->
+    <ul class="nav nav-tabs justify-content-center" id="tabs">
+      <li class="nav-item"><button class="nav-link active" data-target="productsTab">محصولات</button></li>
+      <li class="nav-item"><button class="nav-link" data-target="addTab">مدیریت محصولات</button></li>
+      <li class="nav-item"><button class="nav-link" data-target="ordersTab">سفارشات ثبت‌شده</button></li>
+    </ul>
+
+    <!-- PRODUCTS TAB -->
+    <section id="productsTab" class="py-4">
+      <h3 class="text-center mb-3">محصولات ما</h3>
+      <div class="row g-4" id="productsGrid">
+        <!-- محصولات با جاوااسکریپت پر می‌شوند -->
       </div>
-    </div>
-    <div class="tab-pane fade" id="order">
-      <!-- فرم سفارش اینجا -->
-    </div>
-    <div class="tab-pane fade" id="orders-list">
-      <!-- لیست سفارش‌ها -->
-    </div>
+    </section>
+
+    <!-- ADMIN / ADD PRODUCT TAB -->
+    <section id="addTab" class="py-4" style="display:none">
+      <div class="admin-panel">
+        <h4>اضافه کردن محصول جدید</h4>
+        <form id="addProductForm" class="row g-2">
+          <div class="col-12 col-md-4">
+            <label class="form-label">نام محصول</label>
+            <input id="newName" class="form-control" required />
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label">قیمت (تومان)</label>
+            <input id="newPrice" type="number" min="0" class="form-control" required />
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label">لینک مستقیم تصویر</label>
+            <input id="newImage" type="url" class="form-control" placeholder="https://..." required />
+          </div>
+          <div class="col-12 text-start">
+            <button class="btn btn-primary" type="submit">افزودن محصول</button>
+            <button class="btn btn-outline-secondary" id="resetDefaults" type="button">بارگذاری محصولات پیش‌فرض</button>
+          </div>
+        </form>
+
+        <hr />
+
+        <h5 class="mt-3">محصولات فعلی</h5>
+        <div id="adminProducts" class="row g-3 mt-2"></div>
+        <p class="mt-3 text-muted small">برای تغییر عکس محصول، در فرم بالا لینک عکس جدید را وارد کن و دوباره محصول را اضافه کن یا محصول قبلی را حذف کن.</p>
+      </div>
+    </section>
+
+    <!-- ORDERS TAB -->
+    <section id="ordersTab" class="py-4" style="display:none">
+      <div class="orders-list">
+        <h4>سفارشات ثبت‌شده</h4>
+        <div id="ordersContainer" class="mt-2">هیچ سفارشی ثبت نشده است.</div>
+      </div>
+    </section>
+
+    <!-- contact -->
+    <section id="contact" class="py-4 text-center">
+      <h4>تماس با ما</h4>
+      <p>برای سفارش و پشتیبانی در تلگرام با ما در تماس باشید:</p>
+      <a href="https://t.me/noj1385" target="_blank" class="btn btn-primary">آیدی تلگرام: @noj1385</a>
+    </section>
+
+  </div>
+</main>
+
+<!-- order modal -->
+<div id="orderModal" class="order-modal" aria-hidden="true">
+  <div class="order-card">
+    <h5 class="mb-2">فرم ثبت سفارش</h5>
+    <form id="orderForm">
+      <div class="mb-2">
+        <label class="form-label">محصول</label>
+        <input id="orderProduct" class="form-control" readonly />
+      </div>
+      <div class="mb-2">
+        <label class="form-label">قیمت (تومان)</label>
+        <input id="orderPrice" class="form-control" readonly />
+      </div>
+      <div class="mb-2">
+        <label class="form-label">نام و نام خانوادگی</label>
+        <input id="custName" class="form-control" required />
+      </div>
+      <div class="mb-2">
+        <label class="form-label">شماره تلفن (مثال: 09121234567)</label>
+        <input id="custPhone" pattern="^09\d{9}$" class="form-control" required />
+      </div>
+      <div class="mb-2">
+        <label class="form-label">آدرس</label>
+        <textarea id="custAddress" class="form-control" rows="2" required></textarea>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">کد پستی (10 رقم)</label>
+        <input id="custPostal" pattern="^\d{10}$" class="form-control" required />
+      </div>
+      <div class="d-grid gap-2 mt-2">
+        <button type="submit" class="btn btn-success">ثبت و هدایت به پرداخت</button>
+        <button type="button" class="btn btn-light" id="cancelOrder">انصراف</button>
+      </div>
+    </form>
   </div>
 </div>
 
-<section id="contact" class="text-center my-4">
-  <h2>تماس با ما</h2>
-  <a href="https://t.me/noj1385" class="btn btn-primary">تلگرام: @noj1385</a>
-</section>
+<!-- footer (ENAMAD + copyright) -->
+<footer>
+  <div>
+    <img src="https://trustseal.enamad.ir/logo.aspx?id=124674&amp;Code=e5LfFkIfiWLnlq2FrP01" alt="نماد اعتماد" class="trust-logo" />
+    <div style="font-size:0.95rem;margin-top:6px">© ۲۰۲۵ نوژشاپ — تمامی حقوق محفوظ است</div>
+  </div>
+</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-const ham = document.getElementById('hamburger-menu');
-const menu = document.getElementById('menu-dropdown');
-ham.addEventListener('click',()=> menu.classList.toggle('show'));
-document.addEventListener('click',e=>{
-  if(!ham.contains(e.target)&&!menu.contains(e.target)) menu.classList.remove('show');
+/* ---------- initial products (6 default with direct links from Unsplash) ---------- */
+const DEFAULT_PRODUCTS = [
+  { name: 'کرم مرطوب‌کننده', price: 250000, image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=60' },
+  { name: 'رژ لب مایع مات', price: 150000, image: 'https://images.unsplash.com/photo-1600180758890-9b6b6a7ef7c9?auto=format&fit=crop&w=800&q=60' },
+  { name: 'سرم ویتامین C', price: 320000, image: 'https://images.unsplash.com/photo-1575936123452-b67c3203c357?auto=format&fit=crop&w=800&q=60' },
+  { name: 'ادو پرفیوم زنانه', price: 400000, image: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=60' },
+  { name: 'ماسک صورت', price: 180000, image: 'https://images.unsplash.com/photo-1516054712743-7a2fc0e960f3?auto=format&fit=crop&w=800&q=60' },
+  { name: 'لاک ناخن رنگی', price: 90000, image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=60' }
+];
+
+/* ---------- storage keys ---------- */
+const PKEY = 'noj_products_v1';
+const OKEY = 'noj_orders_v1';
+
+/* ---------- load or init products ---------- */
+let products = JSON.parse(localStorage.getItem(PKEY) || 'null');
+if (!products) {
+  products = DEFAULT_PRODUCTS.slice();
+  localStorage.setItem(PKEY, JSON.stringify(products));
+}
+
+/* ---------- UI refs ---------- */
+const productsGrid = document.getElementById('productsGrid');
+const adminProducts = document.getElementById('adminProducts');
+const addForm = document.getElementById('addProductForm');
+const newName = document.getElementById('newName');
+const newPrice = document.getElementById('newPrice');
+const newImage = document.getElementById('newImage');
+const resetDefaultsBtn = document.getElementById('resetDefaults');
+
+const tabs = document.querySelectorAll('#tabs .nav-link');
+const productsTab = document.getElementById('productsTab');
+const addTab = document.getElementById('addTab');
+const ordersTab = document.getElementById('ordersTab');
+
+/* ---------- render products on main page ---------- */
+function renderProducts() {
+  productsGrid.innerHTML = '';
+  products.forEach((p, idx) => {
+    const col = document.createElement('div');
+    col.className = 'col-12 col-md-4';
+    col.innerHTML = `
+      <div class="card h-100 shadow-sm">
+        <img src="${escapeHtml(p.image)}" class="card-img-top product-img" alt="${escapeHtml(p.name)}" onerror="this.src='https://via.placeholder.com/600x400?text=No+Image'"/>
+        <div class="card-body text-center">
+          <h5 class="card-title">${escapeHtml(p.name)}</h5>
+          <p class="card-text text-danger fw-bold">${numberWithCommas(p.price)} تومان</p>
+          <div class="d-flex gap-2 justify-content-center">
+            <button class="btn btn-sm btn-success buy-btn" data-idx="${idx}">خرید</button>
+            <button class="btn btn-sm btn-outline-danger del-prod-btn" data-idx="${idx}">حذف</button>
+          </div>
+        </div>
+      </div>
+    `;
+    productsGrid.appendChild(col);
+  });
+
+  // attach buy and delete handlers
+  document.querySelectorAll('.buy-btn').forEach(btn => btn.addEventListener('click', onBuy));
+  document.querySelectorAll('.del-prod-btn').forEach(btn => btn.addEventListener('click', onDeleteProduct));
+}
+
+/* ---------- admin product list (for management) ---------- */
+function renderAdminProducts() {
+  adminProducts.innerHTML = '';
+  products.forEach((p, idx) => {
+    const col = document.createElement('div');
+    col.className = 'col-12 col-md-6';
+    col.innerHTML = `
+      <div class="card p-2 d-flex flex-row align-items-center">
+        <img src="${escapeHtml(p.image)}" style="width:86px;height:64px;object-fit:cover;border-radius:8px" onerror="this.src='https://via.placeholder.com/150x100?text=No+Image'"/>
+        <div style="flex:1;padding:0 12px">
+          <div style="font-weight:700">${escapeHtml(p.name)}</div>
+          <div class="text-danger">${numberWithCommas(p.price)} تومان</div>
+        </div>
+        <div>
+          <button class="btn btn-sm btn-outline-danger admin-del" data-idx="${idx}">حذف</button>
+        </div>
+      </div>
+    `;
+    adminProducts.appendChild(col);
+  });
+  document.querySelectorAll('.admin-del').forEach(b=>b.addEventListener('click', (e)=>{
+    const i = Number(e.currentTarget.getAttribute('data-idx'));
+    if(confirm('آیا از حذف این محصول مطمئن هستید؟')) {
+      products.splice(i,1);
+      localStorage.setItem(PKEY, JSON.stringify(products));
+      renderProducts(); renderAdminProducts();
+    }
+  }));
+}
+
+/* ---------- add product handler ---------- */
+addForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = newName.value.trim();
+  const price = Number(newPrice.value);
+  const image = newImage.value.trim();
+  if(!name || !image || !price) { alert('لطفا تمام فیلدها را کامل کنید.'); return; }
+  products.push({name, price, image});
+  localStorage.setItem(PKEY, JSON.stringify(products));
+  addForm.reset();
+  renderProducts(); renderAdminProducts();
+  // switch to products tab after adding
+  showTab('productsTab');
 });
-document.getElementById('menu-products').onclick = ()=>{new bootstrap.Tab(document.getElementById('products-tab')).show(); menu.classList.remove('show');};
-document.getElementById('menu-order').onclick = ()=>{new bootstrap.Tab(document.getElementById('order-tab')).show(); menu.classList.remove('show');};
-document.getElementById('menu-contact').onclick = ()=>{document.getElementById('contact').scrollIntoView({behavior:'smooth'}); menu.classList.remove('show');};
+
+/* ---------- reset defaults ---------- */
+resetDefaultsBtn.addEventListener('click', ()=>{
+  if(!confirm('محصولات فعلی حذف و محصولات پیش‌فرض بارگذاری شوند؟')) return;
+  products = DEFAULT_PRODUCTS.slice();
+  localStorage.setItem(PKEY, JSON.stringify(products));
+  renderProducts(); renderAdminProducts();
+  showTab('productsTab');
+});
+
+/* ---------- delete product from grid ---------- */
+function onDeleteProduct(e){
+  const idx = Number(e.currentTarget.getAttribute('data-idx'));
+  if(!confirm('آیا می‌خواهید این محصول حذف شود؟')) return;
+  products.splice(idx,1);
+  localStorage.setItem(PKEY, JSON.stringify(products));
+  renderProducts(); renderAdminProducts();
+}
+
+/* ---------- order logic ---------- */
+let orders = JSON.parse(localStorage.getItem(OKEY) || '[]');
+const orderModal = document.getElementById('orderModal');
+const orderForm = document.getElementById('orderForm');
+const orderProduct = document.getElementById('orderProduct');
+const orderPrice = document.getElementById('orderPrice');
+const ordersContainer = document.getElementById('ordersContainer');
+
+/* buy -> open order modal populated */
+function onBuy(e){
+  const idx = Number(e.currentTarget.getAttribute('data-idx'));
+  const p = products[idx];
+  orderProduct.value = p.name;
+  orderPrice.value = p.price;
+  orderModal.classList.add('show'); orderModal.setAttribute('aria-hidden','false');
+}
+
+/* order submit */
+orderForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('custName').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+  const addr = document.getElementById('custAddress').value.trim();
+  const postal = document.getElementById('custPostal').value.trim();
+  const product = orderProduct.value;
+  const price = Number(orderPrice.value || 0);
+  if(!name || !phone || !addr || !postal){ alert('لطفا همه فیلدها را کامل کنید.'); return; }
+  // generate order code
+  const now = new Date();
+  const code = 'NOJ' + now.getFullYear().toString().slice(2) + (now.getMonth()+1).toString().padStart(2,'0') + now.getDate().toString().padStart(2,'0') + '-' + now.getTime().toString().slice(-5);
+  const order = { code, product, price, name, phone, addr, postal, created: now.toISOString() };
+  orders.push(order);
+  localStorage.setItem(OKEY, JSON.stringify(orders));
+  orderForm.reset();
+  orderModal.classList.remove('show'); orderModal.setAttribute('aria-hidden','true');
+  renderOrders();
+  alert(`سفارش ثبت شد!\nکد سفارش: ${code}\nشما به صفحه پرداخت هدایت می‌شوید.`);
+  // open payment (sample) — replace merchantID & callbackURL with real values when ready
+  const merchantID = 'YOUR_MERCHANT_ID';
+  const amount = price;
+  const description = encodeURIComponent(`خرید ${product} — کد سفارش ${code}`);
+  const callbackURL = 'https://yourdomain.com/payment-callback';
+  const paymentURL = `https://www.zarinpal.com/pg/StartPay/${merchantID}?Amount=${amount}&Description=${description}&CallbackURL=${callbackURL}`;
+  // open payment in new tab (for now it's a placeholder)
+  window.open(paymentURL,'_blank');
+});
+
+/* cancel order */
+document.getElementById('cancelOrder').addEventListener('click', ()=>{
+  orderForm.reset();
+  orderModal.classList.remove('show'); orderModal.setAttribute('aria-hidden','true');
+});
+
+/* render orders list */
+function renderOrders(){
+  ordersContainer.innerHTML = '';
+  if(!orders || orders.length===0){ ordersContainer.textContent = 'هیچ سفارشی ثبت نشده است.'; return; }
+  orders.forEach((o, idx) => {
+    const div = document.createElement('div');
+    div.className = 'd-flex align-items-start justify-content-between mb-2 p-2 border rounded';
+    div.innerHTML = `
+      <div style="flex:1">
+        <strong>${escapeHtml(o.product)}</strong> — <small class="text-muted">کد: ${escapeHtml(o.code)}</small><br/>
+        ${numberWithCommas(o.price)} تومان — ${escapeHtml(o.name)} — ${escapeHtml(o.phone)}<br/>
+        ${escapeHtml(o.addr)} — کدپستی: ${escapeHtml(o.postal)}
+      </div>
+      <div style="margin-left:10px">
+        <button class="btn btn-sm btn-outline-danger del-order" data-idx="${idx}">حذف</button>
+      </div>
+    `;
+    ordersContainer.appendChild(div);
+  });
+  // attach delete handlers
+  document.querySelectorAll('.del-order').forEach(b=>{
+    b.addEventListener('click', (e)=>{
+      const i = Number(e.currentTarget.getAttribute('data-idx'));
+      if(!confirm('آیا مطمئنید سفارش حذف شود؟')) return;
+      orders.splice(i,1);
+      localStorage.setItem(OKEY, JSON.stringify(orders));
+      renderOrders();
+    });
+  });
+}
+
+/* ---------- tabs switching ---------- */
+tabs.forEach(t => {
+  t.addEventListener('click', () => {
+    tabs.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const target = t.getAttribute('data-target') || t.dataset.target;
+    // hide all sections
+    [productsTab, addTab, ordersTab].forEach(s=>s.style.display='none');
+    // show selected
+    if(target==='productsTab') productsTab.style.display='block';
+    else if(target==='addTab') addTab.style.display='block';
+    else if(target==='ordersTab') ordersTab.style.display='block';
+    // scroll top of section smoothly
+    setTimeout(()=>document.querySelector(`#${target}`).scrollIntoView({behavior:'smooth'}),120);
+  });
+});
+
+/* ---------- hamburger menu ---------- */
+const hamburger = document.getElementById('hamburger');
+const dropdown = document.getElementById('dropdownMenu');
+hamburger.addEventListener('click', ()=> {
+  dropdown.classList.toggle('show');
+});
+document.addEventListener('click', (e)=>{
+  if(!hamburger.contains(e.target) && !dropdown.contains(e.target)) dropdown.classList.remove('show');
+});
+document.getElementById('menuhome').addEventListener('click', ()=> { window.scrollTo({top:0,behavior:'smooth'}); dropdown.classList.remove('show'); });
+document.getElementById('menuproducts').addEventListener('click', ()=> { document.querySelector('[data-target="productsTab"]').click(); dropdown.classList.remove('show'); });
+document.getElementById('menuorders').addEventListener('click', ()=> { document.querySelector('[data-target="ordersTab"]').click(); dropdown.classList.remove('show'); });
+document.getElementById('menucontact').addEventListener('click', ()=> { document.getElementById('contact').scrollIntoView({behavior:'smooth'}); dropdown.classList.remove('show'); });
+
+/* ---------- helpers ---------- */
+function numberWithCommas(x){ return String(x).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+function escapeHtml(s){ if(!s && s!==0) return ''; return String(s).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]); }
+
+/* ---------- initial render ---------- */
+renderProducts();
+renderAdminProducts();
+renderOrders();
+
+/* keep orders and products in-sync across tabs if user changes in other tab */
+window.addEventListener('storage', (e)=>{
+  if(e.key===PKEY){ products = JSON.parse(localStorage.getItem(PKEY) || '[]'); renderProducts(); renderAdminProducts(); }
+  if(e.key===OKEY){ orders = JSON.parse(localStorage.getItem(OKEY) || '[]'); renderOrders(); }
+});
 </script>
-</body>
-      </html>
