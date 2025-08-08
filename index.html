@@ -28,6 +28,40 @@
     border-bottom: 1px solid #ddd;
     padding: 0.5rem 0;
   }
+  /* سه خط پایین صفحه */
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 1rem;
+  }
+  .footer-links button {
+    background: transparent;
+    border: 1.5px solid white;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .footer-links button:hover {
+    background-color: white;
+    color: #d63384;
+  }
+  /* توضیح صمیمانه */
+  #welcome-text {
+    background: white;
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(214, 51, 132, 0.3);
+    color: #444;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    text-align: center;
+  }
 </style>
 </head>
 <body>
@@ -36,6 +70,13 @@
   <h1>نوژشاپ</h1>
   <p>فروشگاه آنلاین لوازم آرایشی و بهداشتی</p>
 </header>
+
+<div id="welcome-text">
+  <p>دوست عزیز، توی نوژشاپ تلاش کردیم بهترین و باکیفیت‌ترین محصولات آرایشی و بهداشتی رو براتون فراهم کنیم.  
+  هر محصول رو با دقت انتخاب کردیم تا شما با خیال راحت زیبایی و سلامت رو تجربه کنید.  
+  هدف ما فقط فروش نیست، بلکه ایجاد یک تجربه صمیمانه و دلنشین خرید برای شماست.  
+  از اینکه به ما اعتماد می‌کنید بی‌نهایت ممنونیم و همیشه کنار شما هستیم!</p>
+</div>
 
 <div class="container">
 
@@ -154,6 +195,10 @@
           <label for="customer-address" class="form-label">آدرس:</label>
           <textarea class="form-control" id="customer-address" rows="3" required></textarea>
         </div>
+        <div class="mb-3">
+          <label for="customer-postal" class="form-label">کد پستی:</label>
+          <input type="text" pattern="^\d{10}$" class="form-control" id="customer-postal" placeholder="مثال: 1234567890" required />
+        </div>
         <button type="submit" class="btn btn-success w-100">ثبت و پرداخت</button>
       </form>
     </div>
@@ -161,7 +206,6 @@
     <div class="tab-pane fade" id="orders-list" role="tabpanel" aria-labelledby="orders-list-tab">
       <div class="order-list">
         <h4>سفارشات شما</h4>
-        <button id="clear-orders" class="btn btn-danger mb-3">حذف همه سفارشات</button>
         <div id="orders-container">هیچ سفارشی ثبت نشده است.</div>
       </div>
     </div>
@@ -176,10 +220,15 @@
 </section>
 
 <footer class="text-center">
-  <div class="container d-flex justify-content-center align-items-center flex-wrap" style="padding: 10px 0;">
+  <div class="container d-flex justify-content-center align-items-center flex-wrap" style="padding: 10px 0; flex-direction: column;">
     <img src="https://trustseal.enamad.ir/logo.aspx?id=124674&amp;Code=e5LfFkIfiWLnlq2FrP01" 
-         alt="نماد اعتماد الکترونیکی" style="height:60px; margin-left:15px;" />
+         alt="نماد اعتماد الکترونیکی" style="height:60px; margin-bottom: 8px;" />
     <span>© ۲۰۲۵ نوژشاپ - تمامی حقوق محفوظ است</span>
+    <div class="footer-links mt-3">
+      <button onclick="showTab('products-tab')">محصولات</button>
+      <button onclick="showTab('order-tab')">ثبت سفارش</button>
+      <button onclick="scrollToContact()">تماس با ما</button>
+    </div>
   </div>
 </footer>
 
@@ -193,7 +242,6 @@
   const ordersListTabBtn = document.getElementById('orders-list-tab');
   const ordersContainer = document.getElementById('orders-container');
   const orderForm = document.getElementById('order-form');
-  const clearOrdersBtn = document.getElementById('clear-orders');
 
   buyButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -219,17 +267,32 @@
     let html = '';
     orders.forEach((order, idx) => {
       html += `
-        <div class="order-item">
-          <strong>سفارش شماره ${idx + 1}:</strong><br />
-          محصول: ${order.product}<br />
-          قیمت: ${order.price} تومان<br />
-          نام خریدار: ${order.customerName}<br />
-          تلفن: ${order.customerPhone}<br />
-          آدرس: ${order.customerAddress}
+        <div class="order-item d-flex justify-content-between align-items-center" data-index="${idx}">
+          <div>
+            <strong>سفارش شماره ${idx + 1}:</strong><br />
+            محصول: ${order.product}<br />
+            قیمت: ${order.price} تومان<br />
+            نام خریدار: ${order.customerName}<br />
+            تلفن: ${order.customerPhone}<br />
+            آدرس: ${order.customerAddress}<br />
+            کد پستی: ${order.customerPostal}
+          </div>
+          <button class="btn btn-sm btn-outline-danger btn-delete-order">حذف</button>
         </div>
       `;
     });
     ordersContainer.innerHTML = html;
+
+    // اضافه کردن رویداد حذف تکی سفارشات
+    ordersContainer.querySelectorAll('.btn-delete-order').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const idx = Number(e.target.parentElement.getAttribute('data-index'));
+        const orders = JSON.parse(localStorage.getItem('nojshopOrders') || '[]');
+        orders.splice(idx, 1);
+        localStorage.setItem('nojshopOrders', JSON.stringify(orders));
+        loadOrders();
+      });
+    });
   }
 
   ordersListTabBtn.addEventListener('shown.bs.tab', loadOrders);
@@ -240,16 +303,17 @@
     const customerName = document.getElementById('customer-name').value.trim();
     const customerPhone = document.getElementById('customer-phone').value.trim();
     const customerAddress = document.getElementById('customer-address').value.trim();
+    const customerPostal = document.getElementById('customer-postal').value.trim();
     const product = productNameInput.value;
     const price = priceInput.value;
 
-    if (!customerName || !customerPhone || !customerAddress) {
+    if (!customerName || !customerPhone || !customerAddress || !customerPostal) {
       alert('لطفا همه فیلدها را کامل کنید.');
       return;
     }
 
     const orders = JSON.parse(localStorage.getItem('nojshopOrders') || '[]');
-    orders.push({ product, price, customerName, customerPhone, customerAddress });
+    orders.push({ product, price, customerName, customerPhone, customerAddress, customerPostal });
     localStorage.setItem('nojshopOrders', JSON.stringify(orders));
 
     alert(`سفارش شما ثبت شد!\nاکنون به صفحه پرداخت هدایت می‌شوید.`);
@@ -269,20 +333,19 @@
     tab.show();
   });
 
-  clearOrdersBtn.addEventListener('click', () => {
-    if(confirm('آیا مطمئنید که می‌خواهید همه سفارشات حذف شوند؟')) {
-      localStorage.removeItem('nojshopOrders');
-      loadOrders();
-      alert('همه سفارشات حذف شدند.');
+  function showTab(tabId) {
+    const tabTriggerEl = document.getElementById(tabId);
+    if (tabTriggerEl) {
+      const tab = new bootstrap.Tab(tabTriggerEl);
+      tab.show();
     }
-  });
+  }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    if(document.getElementById('orders-list').classList.contains('show','active')){
-      loadOrders();
-    }
-  });
+  function scrollToContact() {
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+  }
 </script>
 
 </body>
 </html>
+``
