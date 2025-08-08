@@ -35,6 +35,28 @@
       font-weight: bold;
       color: #d63384 !important;
     }
+    /* Popup form style */
+    .popup-form {
+      display: none;
+      position: fixed;
+      z-index: 1050;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      max-width: 400px;
+      width: 90%;
+    }
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      z-index: 1040;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
@@ -87,7 +109,7 @@
             <div class="card-body text-center">
               <h5 class="card-title">کرم مرطوب‌کننده</h5>
               <p class="card-text text-danger fw-bold">۲۵۰,۰۰۰ تومان</p>
-              <a href="https://example.com/pay" class="btn btn-danger">خرید</a>
+              <button class="btn btn-danger" onclick="openOrderForm('کرم مرطوب‌کننده', 250000)">خرید</button>
             </div>
           </div>
         </div>
@@ -100,7 +122,7 @@
             <div class="card-body text-center">
               <h5 class="card-title">رژ لب مایع مات</h5>
               <p class="card-text text-danger fw-bold">۱۵۰,۰۰۰ تومان</p>
-              <a href="https://example.com/pay" class="btn btn-danger">خرید</a>
+              <button class="btn btn-danger" onclick="openOrderForm('رژ لب مایع مات', 150000)">خرید</button>
             </div>
           </div>
         </div>
@@ -113,7 +135,7 @@
             <div class="card-body text-center">
               <h5 class="card-title">سرم ویتامین C</h5>
               <p class="card-text text-danger fw-bold">۳۲۰,۰۰۰ تومان</p>
-              <a href="https://example.com/pay" class="btn btn-danger">خرید</a>
+              <button class="btn btn-danger" onclick="openOrderForm('سرم ویتامین C', 320000)">خرید</button>
             </div>
           </div>
         </div>
@@ -126,7 +148,7 @@
             <div class="card-body text-center">
               <h5 class="card-title">ادو پرفیوم زنانه</h5>
               <p class="card-text text-danger fw-bold">۴۰۰,۰۰۰ تومان</p>
-              <a href="https://example.com/pay" class="btn btn-danger">خرید</a>
+              <button class="btn btn-danger" onclick="openOrderForm('ادو پرفیوم زنانه', 400000)">خرید</button>
             </div>
           </div>
         </div>
@@ -139,7 +161,7 @@
             <div class="card-body text-center">
               <h5 class="card-title">ماسک صورت</h5>
               <p class="card-text text-danger fw-bold">۱۸۰,۰۰۰ تومان</p>
-              <a href="https://example.com/pay" class="btn btn-danger">خرید</a>
+              <button class="btn btn-danger" onclick="openOrderForm('ماسک صورت', 180000)">خرید</button>
             </div>
           </div>
         </div>
@@ -152,13 +174,43 @@
             <div class="card-body text-center">
               <h5 class="card-title">لاک ناخن رنگی</h5>
               <p class="card-text text-danger fw-bold">۹۰,۰۰۰ تومان</p>
-              <a href="https://example.com/pay" class="btn btn-danger">خرید</a>
+              <button class="btn btn-danger" onclick="openOrderForm('لاک ناخن رنگی', 90000)">خرید</button>
             </div>
           </div>
         </div>
 
       </div>
     </section>
+
+    <!-- فرم سفارش پاپ‌آپ -->
+    <div id="popupOverlay" class="popup-overlay"></div>
+    <div id="orderForm" class="popup-form">
+      <h4>فرم سفارش</h4>
+      <form id="formOrder" onsubmit="return submitOrder(event)">
+        <div class="mb-3 text-start">
+          <label for="customerName" class="form-label">نام و نام خانوادگی</label>
+          <input type="text" class="form-control" id="customerName" required />
+        </div>
+        <div class="mb-3 text-start">
+          <label for="customerPhone" class="form-label">شماره تماس</label>
+          <input type="tel" class="form-control" id="customerPhone" required pattern="0[0-9]{10}" placeholder="مثال: 09121234567" />
+        </div>
+        <div class="mb-3 text-start">
+          <label for="customerAddress" class="form-label">آدرس</label>
+          <textarea class="form-control" id="customerAddress" rows="2" required></textarea>
+        </div>
+        <div class="mb-3 text-start">
+          <label for="productName" class="form-label">محصول</label>
+          <input type="text" class="form-control" id="productName" readonly />
+        </div>
+        <div class="mb-3 text-start">
+          <label for="productPrice" class="form-label">قیمت (تومان)</label>
+          <input type="number" class="form-control" id="productPrice" readonly />
+        </div>
+        <button type="submit" class="btn btn-success w-100">ثبت سفارش و پرداخت</button>
+        <button type="button" class="btn btn-secondary w-100 mt-2" onclick="closeOrderForm()">انصراف</button>
+      </form>
+    </div>
 
     <!-- بخش تماس با ما -->
     <section id="contact" class="mb-5 text-center">
@@ -179,5 +231,61 @@
 
   <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // بازکردن فرم سفارش با اطلاعات محصول
+    function openOrderForm(product, price) {
+      document.getElementById('productName').value = product;
+      document.getElementById('productPrice').value = price;
+      document.getElementById('popupOverlay').style.display = 'block';
+      document.getElementById('orderForm').style.display = 'block';
+    }
+
+    // بستن فرم سفارش
+    function closeOrderForm() {
+      document.getElementById('popupOverlay').style.display = 'none';
+      document.getElementById('orderForm').style.display = 'none';
+      document.getElementById('formOrder').reset();
+    }
+
+    // ارسال فرم سفارش و هدایت به صفحه پرداخت (فعلاً لینک پرداخت فرضیه، باید لینک واقعی زرین‌پال جایگزین شود)
+    function submitOrder(event) {
+      event.preventDefault();
+      const name = document.getElementById('customerName').value.trim();
+      const phone = document.getElementById('customerPhone').value.trim();
+      const address = document.getElementById('customerAddress').value.trim();
+      const product = document.getElementById('productName').value;
+      const price = document.getElementById('productPrice').value;
+
+      if (!name || !phone || !address) {
+        alert('لطفاً تمام فیلدها را کامل کنید.');
+        return false;
+      }
+
+      // اینجا می‌تونی اطلاعات سفارش رو به سرور یا ایمیل بفرستی، فعلاً فقط نمایش میدیم
+      alert(
+        `سفارش شما ثبت شد!\n\n` +
+        `نام: ${name}\n` +
+        `شماره تماس: ${phone}\n` +
+        `آدرس: ${address}\n` +
+        `محصول: ${product}\n` +
+        `قیمت: ${price} تومان\n\n` +
+        `شما به صفحه پرداخت منتقل خواهید شد.`
+      );
+
+      // ساخت لینک پرداخت زرین‌پال با پارامترهای مناسب (لینک زیر فرضیه، باید با لینک واقعی جایگزین بشه)
+      // در زرین‌پال می‌تونی از API استفاده کنی ولی چون سایت استاتیکه، لینک ساده می‌سازیم:
+      const paymentLink = `https://zarinpal.com/pg/StartPay/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX?amount=${price}&description=خرید ${encodeURIComponent(product)} توسط ${encodeURIComponent(name)}`;
+
+      // باز کردن لینک پرداخت در صفحه جدید
+      window.open(paymentLink, '_blank');
+
+      closeOrderForm();
+      return true;
+    }
+
+    // بستن فرم با کلیک روی پس‌زمینه
+    document.getElementById('popupOverlay').addEventListener('click', closeOrderForm);
+  </script>
 </body>
-  </html>
+            </html>
