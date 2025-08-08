@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>نوژشاپ - فروشگاه لوازم آرایشی و بهداشتی</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
-  <style>
-    body { background: #f9f9fb; font-family: "Tahoma", sans-serif; }
-    header, footer { background-color: #d63384; color: white; padding: 1rem 0; }
-    .product-img { height: 200px; object-fit: cover; border-radius: 10px; }
-    .trust-logo { height: 60px; margin-left: 15px; }
-    nav a.nav-link.active { font-weight: bold; color: #d63384 !important; }
-    #adminPanel { display: none; }
-    #loginPanel { max-width: 400px; margin: 2rem auto; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>نوژشاپ - فروشگاه لوازم آرایشی و بهداشتی</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+<style>
+  body { background: #f9f9fb; font-family: "Tahoma", sans-serif; margin:0; padding:0;}
+  header { background-color: #d63384; color: white; padding: 1rem 0; }
+  footer { background-color: #d63384; color: white; padding: 1rem 0; margin-top: 2rem; }
+  .product-img { height: 200px; object-fit: cover; border-radius: 10px; }
+  .trust-logo { height: 60px; margin-left: 15px; }
+  nav a.nav-link.active { font-weight: bold; color: #d63384 !important; }
+  #adminSection { display: none; padding-bottom: 3rem;}
+  .product-img-thumb { width: 60px; height: 40px; object-fit: cover; border-radius: 6px; margin-left: 8px; }
+  nav .navbar-toggler-icon {
+    filter: invert(33%) sepia(54%) saturate(6817%) hue-rotate(322deg) brightness(89%) contrast(103%);
+  }
+</style>
 </head>
 <body>
 
@@ -22,95 +26,84 @@
   <p>فروشگاه آنلاین لوازم آرایشی و بهداشتی</p>
 </header>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
   <div class="container">
-    <a class="navbar-brand" href="#home">نوژشاپ</a>
+    <a class="navbar-brand" href="#" id="nav-home">نوژشاپ</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
       aria-controls="navbarNav" aria-expanded="false" aria-label="نمایش فهرست">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link active" href="#home">خانه</a></li>
-        <li class="nav-item"><a class="nav-link" href="#products">محصولات</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">تماس با ما</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" id="adminBtn">مدیریت سایت</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#" id="link-home">خانه</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" id="link-products">محصولات</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" id="link-contact">تماس با ما</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" id="link-admin">مدیریت سایت</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<main class="container my-4">
+<main class="container">
 
-  <!-- بخش خانه -->
-  <section id="home" class="mb-5 text-center">
-    <h2>به نوژشاپ خوش آمدید!</h2>
-    <p style="max-width: 600px; margin: auto; font-size: 1.1rem; color: #555;">
-      تو نوژشاپ، ما باور داریم زیبایی حق همه‌ست.  
-      محصولات باکیفیت و تازه‌ترین برندهای آرایشی و بهداشتی رو با قیمت مناسب براتون فراهم کردیم.  
-      تیم ما همیشه آماده‌ست تا بهترین‌ها رو به دست شما برسونه و تجربه خریدی راحت و لذت‌بخش داشته باشید.  
-      با نوژشاپ، درخشش و سلامت پوست و مو رو به خودتون هدیه بدید!  
-    </p>
-  </section>
+  <!-- صفحه اصلی -->
+  <div id="mainSection">
+    <!-- خانه -->
+    <section id="home" class="mb-5 text-center">
+      <h2>به نوژشاپ خوش آمدید!</h2>
+      <p style="max-width: 600px; margin: auto; font-size: 1.1rem; color: #555;">
+        تو نوژشاپ، ما باور داریم زیبایی حق همه‌ست.  
+        محصولات باکیفیت و تازه‌ترین برندهای آرایشی و بهداشتی رو با قیمت مناسب براتون فراهم کردیم.  
+        تیم ما همیشه آماده‌ست تا بهترین‌ها رو به دست شما برسونه و تجربه خریدی راحت و لذت‌بخش داشته باشید.  
+        با نوژشاپ، درخشش و سلامت پوست و مو رو به خودتون هدیه بدید!  
+      </p>
+    </section>
 
-  <!-- بخش محصولات -->
-  <section id="products" class="mb-5">
-    <h2 class="mb-4 text-center">محصولات ما</h2>
-    <div class="row g-4" id="productList">
-      <!-- محصولات اینجا با JS اضافه میشن -->
-    </div>
-  </section>
+    <!-- محصولات -->
+    <section id="products" class="mb-5" style="display:none;">
+      <h2 class="mb-4 text-center">محصولات ما</h2>
+      <div class="row g-4" id="product-list"></div>
+    </section>
 
-  <!-- بخش سفارشات -->
-  <section id="ordersSection" style="display:none;" class="mb-5">
-    <h2 class="mb-4 text-center">سفارشات ثبت شده</h2>
-    <ul class="list-group" id="orderList">
-      <!-- سفارشات اینجا با JS اضافه میشن -->
-    </ul>
-  </section>
+    <!-- تماس با ما -->
+    <section id="contact" class="mb-5 text-center" style="display:none;">
+      <h2>تماس با ما</h2>
+      <p>برای سفارش و سوالات، در تلگرام با ما در ارتباط باشید:</p>
+      <a href="https://t.me/noj1385" target="_blank" class="btn btn-primary">آیدی تلگرام: @noj1385</a>
+    </section>
+  </div>
 
-  <!-- بخش تماس با ما -->
-  <section id="contact" class="mb-5 text-center">
-    <h2>تماس با ما</h2>
-    <p>برای سفارش و سوالات، در تلگرام با ما در ارتباط باشید:</p>
-    <a href="https://t.me/noj1385" target="_blank" class="btn btn-primary">آیدی تلگرام: @noj1385</a>
-  </section>
+  <!-- صفحه مدیریت -->
+  <div id="adminSection" dir="rtl">
+    <header class="text-center mb-4">
+      <h1>مدیریت نوژشاپ</h1>
+    </header>
 
-  <!-- پنل ورود مدیریت -->
-  <section id="loginPanel">
-    <h3 class="text-center">ورود مدیریت</h3>
-    <input type="password" id="adminPassword" class="form-control mb-3" placeholder="رمز عبور را وارد کنید" />
-    <button id="loginBtn" class="btn btn-danger w-100">ورود</button>
-    <p id="loginError" class="text-danger mt-2" style="display:none;">رمز عبور اشتباه است.</p>
-  </section>
-
-  <!-- پنل مدیریت -->
-  <section id="adminPanel" class="mb-5">
-    <h2 class="mb-4 text-center">پنل مدیریت</h2>
-
-    <!-- فرم افزودن محصول -->
-    <div class="mb-4">
-      <h4>افزودن محصول جدید</h4>
-      <input type="text" id="newTitle" class="form-control mb-2" placeholder="نام محصول" />
-      <input type="text" id="newPrice" class="form-control mb-2" placeholder="قیمت (تومان)" />
-      <input type="text" id="newImage" class="form-control mb-2" placeholder="لینک تصویر" />
-      <button id="addProductBtn" class="btn btn-success">افزودن محصول</button>
+    <div id="loginSection" class="mb-4 text-center">
+      <h4>ورود به مدیریت سایت</h4>
+      <div class="input-group mb-3 mx-auto" style="max-width: 300px;">
+        <input type="password" id="adminPassword" class="form-control" placeholder="رمز را وارد کنید" />
+        <button class="btn btn-primary" id="loginBtn">ورود</button>
+      </div>
+      <div id="loginMsg" class="text-danger"></div>
     </div>
 
-    <!-- لیست محصولات قابل حذف و ویرایش -->
-    <div>
-      <h4>مدیریت محصولات</h4>
-      <ul class="list-group" id="manageProductList"></ul>
-    </div>
+    <div id="manageSection" style="display:none;">
+      <h2>مدیریت محصولات</h2>
+      <ul class="list-group mb-3" id="manageProductList"></ul>
 
-    <!-- لیست سفارشات قابل حذف -->
-    <div class="mt-4">
-      <h4>سفارشات ثبت شده</h4>
+      <h5>افزودن محصول جدید</h5>
+      <form id="addProductForm" class="mb-5 mx-auto" style="max-width: 500px;">
+        <input type="text" class="form-control mb-2" id="newTitle" placeholder="عنوان محصول" required />
+        <input type="text" class="form-control mb-2" id="newPrice" placeholder="قیمت (مثلاً ۲۰۰,۰۰۰ تومان)" required />
+        <input type="text" class="form-control mb-2" id="newImage" placeholder="آدرس تصویر محصول (لینک مستقیم)" required />
+        <button type="submit" class="btn btn-success w-100">افزودن محصول</button>
+      </form>
+
+      <h2>مدیریت سفارشات</h2>
       <ul class="list-group" id="manageOrderList"></ul>
     </div>
-
-    <button id="logoutBtn" class="btn btn-secondary mt-4">خروج از مدیریت</button>
-  </section>
+  </div>
 
 </main>
 
@@ -123,38 +116,45 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-  // داده‌های اولیه محصولات (مثال)
+  // داده های اولیه محصولات
   let products = [
-    {id: 1, title: "کرم مرطوب‌کننده", price: "۲۵۰,۰۰۰ تومان", image: "https://cdn.pixabay.com/photo/2016/03/27/21/17/cosmetics-1284258_1280.jpg"},
-    {id: 2, title: "رژ لب مایع مات", price: "۱۵۰,۰۰۰ تومان", image: "https://cdn.pixabay.com/photo/2018/03/06/22/20/lipstick-3209793_1280.jpg"},
-    {id: 3, title: "سرم ویتامین C", price: "۳۲۰,۰۰۰ تومان", image: "https://cdn.pixabay.com/photo/2017/07/10/19/02/serum-2497527_1280.jpg"},
+    {id:1, title:"کرم مرطوب‌کننده", price:"۲۵۰,۰۰۰ تومان", image:"https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=60"},
+    {id:2, title:"رژ لب مایع مات", price:"۱۵۰,۰۰۰ تومان", image:"https://images.unsplash.com/photo-1600180758890-9b6b6a7ef7c9?auto=format&fit=crop&w=400&q=60"},
+    {id:3, title:"سرم ویتامین C", price:"۳۲۰,۰۰۰ تومان", image:"https://images.unsplash.com/photo-1575936123452-b67c3203c357?auto=format&fit=crop&w=400&q=60"},
+    {id:4, title:"ادو پرفیوم زنانه", price:"۴۰۰,۰۰۰ تومان", image:"https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=60"},
+    {id:5, title:"ماسک صورت", price:"۱۸۰,۰۰۰ تومان", image:"https://images.unsplash.com/photo-1516054712743-7a2fc0e960f3?auto=format&fit=crop&w=400&q=60"},
+    {id:6, title:"لاک ناخن رنگی", price:"۹۰,۰۰۰ تومان", image:"https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400&q=60"},
   ];
 
-  // سفارش‌ها (آغاز خالی)
+  // سفارشات ذخیره شده
   let orders = [];
 
-  // المان‌ها
-  const productList = document.getElementById("productList");
-  const manageProductList = document.getElementById("manageProductList");
-  const manageOrderList = document.getElementById("manageOrderList");
-  const ordersSection = document.getElementById("ordersSection");
-  const adminPanel = document.getElementById("adminPanel");
-  const loginPanel = document.getElementById("loginPanel");
-  const loginBtn = document.getElementById("loginBtn");
-  const adminPasswordInput = document.getElementById("adminPassword");
-  const loginError = document.getElementById("loginError");
-  const adminBtn = document.getElementById("adminBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
+  // بارگذاری از localStorage
+  function loadData() {
+    const savedProducts = localStorage.getItem("products");
+    if(savedProducts) products = JSON.parse(savedProducts);
 
-  // تابع نمایش محصولات در صفحه فروشگاه
+    const savedOrders = localStorage.getItem("orders");
+    if(savedOrders) orders = JSON.parse(savedOrders);
+  }
+
+  // ذخیره داده‌ها در localStorage
+  function saveData() {
+    localStorage.setItem("products", JSON.stringify(products));
+    localStorage.setItem("orders", JSON.stringify(orders));
+  }
+
+  // --- صفحه اصلی ---
+
+  // نمایش محصولات در صفحه اصلی
   function showProducts() {
+    const productList = document.getElementById("product-list");
     productList.innerHTML = "";
     products.forEach(p => {
-      const div = document.createElement("div");
-      div.className = "col-12 col-md-4";
-      div.innerHTML = `
+      const col = document.createElement("div");
+      col.className = "col-12 col-md-4";
+      col.innerHTML = `
         <div class="card shadow-sm">
           <img src="${p.image}" class="card-img-top product-img" alt="${p.title}" />
           <div class="card-body text-center">
@@ -162,189 +162,180 @@
             <p class="card-text text-danger fw-bold">${p.price}</p>
             <button class="btn btn-danger buyBtn" data-id="${p.id}">خرید</button>
           </div>
-        </div>`;
-      productList.appendChild(div);
+        </div>
+      `;
+      productList.appendChild(col);
     });
-    // وصل کردن رویداد کلیک خرید
+    attachBuyEvents();
+  }
+
+  // اتصال رویداد به دکمه خرید
+  function attachBuyEvents() {
     document.querySelectorAll(".buyBtn").forEach(btn => {
       btn.onclick = e => {
         const id = parseInt(e.target.dataset.id);
-        addOrder(id);
+        const product = products.find(p => p.id === id);
+        if(product) {
+          openOrderForm(product);
+        }
       };
     });
   }
 
-  // اضافه کردن سفارش (با فرم ساده و ذخیره در orders)
-  function addOrder(productId) {
-    const product = products.find(p => p.id === productId);
-    if(!product) return alert("محصول یافت نشد");
-    const name = prompt("نام شما:");
-    if(!name) return alert("نام را وارد کنید");
-    const phone = prompt("شماره تماس:");
-    if(!phone) return alert("شماره تماس را وارد کنید");
-    const address = prompt("آدرس:");
-    if(!address) return alert("آدرس را وارد کنید");
-    const postal = prompt("کد پستی:");
-    if(!postal) return alert("کد پستی را وارد کنید");
-    orders.push({
-      id: Date.now(),
-      productTitle: product.title,
-      price: product.price,
-      name, phone, address, postal
-    });
-    alert("سفارش شما ثبت شد. بعد از بررسی با شما تماس می‌گیریم.");
-    if(adminPanel.style.display === "block") renderOrders();
-  }
-
-  // نمایش سفارشات در پنل مدیریت
-  function renderOrders() {
-    if(orders.length === 0) {
-      manageOrderList.innerHTML = "<li class='list-group-item text-center'>سفارشی ثبت نشده</li>";
-      return;
-    }
-    manageOrderList.innerHTML = "";
-    orders.forEach(o => {
-      const li = document.createElement("li");
-      li.className = "list-group-item d-flex justify-content-between align-items-center";
-      li.innerHTML = `
-        <div>
-          <b>محصول:</b> ${o.productTitle} | <b>قیمت:</b> ${o.price} <br />
-          <b>نام:</b> ${o.name} | <b>تلفن:</b> ${o.phone} <br />
-          <b>آدرس:</b> ${o.address} | <b>کد پستی:</b> ${o.postal}
+  // نمایش فرم سفارش
+  function openOrderForm(product) {
+    let formHtml = `
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" dir="rtl">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderModalLabel">ثبت سفارش - ${product.title}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+          </div>
+          <div class="modal-body">
+            <form id="orderForm">
+              <div class="mb-3">
+                <label for="customerName" class="form-label">نام و نام خانوادگی</label>
+                <input type="text" class="form-control" id="customerName" required />
+              </div>
+              <div class="mb-3">
+                <label for="customerPhone" class="form-label">شماره تماس</label>
+                <input type="tel" class="form-control" id="customerPhone" required />
+              </div>
+              <div class="mb-3">
+                <label for="customerAddress" class="form-label">آدرس منزل</label>
+                <input type="text" class="form-control" id="customerAddress" required />
+              </div>
+              <div class="mb-3">
+                <label for="customerPostal" class="form-label">کد پستی</label>
+                <input type="text" class="form-control" id="customerPostal" required />
+              </div>
+              <input type="hidden" id="productId" value="${product.id}" />
+              <button type="submit" class="btn btn-success w-100">ثبت سفارش</button>
+            </form>
+          </div>
         </div>
-        <button class="btn btn-danger btn-sm deleteOrderBtn" data-id="${o.id}">حذف</button>
-      `;
-      manageOrderList.appendChild(li);
-    });
-    // حذف سفارش
-    document.querySelectorAll(".deleteOrderBtn").forEach(btn => {
-      btn.onclick = e => {
-        const id = parseInt(e.target.dataset.id);
-        orders = orders.filter(o => o.id !== id);
-        renderOrders();
-        alert("سفارش حذف شد");
+      </div>
+    </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", formHtml);
+    const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+    orderModal.show();
+
+    document.getElementById("orderForm").onsubmit = function(e) {
+      e.preventDefault();
+      const order = {
+        id: Date.now(),
+        productId: product.id,
+        productTitle: product.title,
+        customerName: document.getElementById("customerName").value.trim(),
+        customerPhone: document.getElementById("customerPhone").value.trim(),
+        customerAddress: document.getElementById("customerAddress").value.trim(),
+        customerPostal: document.getElementById("customerPostal").value.trim(),
+        time: new Date().toLocaleString()
       };
+      orders.push(order);
+      saveData();
+      alert("سفارش شما با موفقیت ثبت شد.");
+      orderModal.hide();
+      document.getElementById('orderModal').remove();
+    };
+
+    document.getElementById('orderModal').addEventListener('hidden.bs.modal', function () {
+      document.getElementById('orderModal').remove();
     });
   }
 
-  // نمایش محصولات در پنل مدیریت با قابلیت حذف و ویرایش عنوان و قیمت
-  function renderManageProducts() {
-    if(products.length === 0) {
-      manageProductList.innerHTML = "<li class='list-group-item text-center'>محصولی وجود ندارد</li>";
-      return;
+  // --- صفحه مدیریت ---
+
+  const loginSection = document.getElementById("loginSection");
+  const manageSection = document.getElementById("manageSection");
+  const loginBtn = document.getElementById("loginBtn");
+  const loginMsg = document.getElementById("loginMsg");
+  const adminPasswordInput = document.getElementById("adminPassword");
+  const manageProductList = document.getElementById("manageProductList");
+  const manageOrderList = document.getElementById("manageOrderList");
+
+  // ورود به بخش مدیریت
+  loginBtn.onclick = () => {
+    const val = adminPasswordInput.value;
+    if(val === "1225") {
+      loginSection.style.display = "none";
+      manageSection.style.display = "block";
+      renderManageProducts();
+      renderManageOrders();
+      adminPasswordInput.value = "";
+      loginMsg.textContent = "";
+    } else {
+      loginMsg.textContent = "رمز اشتباه است.";
     }
+  };
+
+  // نمایش لیست محصولات مدیریت
+  function renderManageProducts() {
     manageProductList.innerHTML = "";
     products.forEach(p => {
       const li = document.createElement("li");
-      li.className = "list-group-item d-flex justify-content-between align-items-center";
+      li.className = "list-group-item d-flex align-items-center justify-content-between flex-wrap";
       li.innerHTML = `
-        <div style="flex-grow:1">
-          <input type="text" class="form-control mb-1 productTitleInput" data-id="${p.id}" value="${p.title}" />
-          <input type="text" class="form-control productPriceInput" data-id="${p.id}" value="${p.price}" />
-          <input type="text" class="form-control productImageInput mt-1" data-id="${p.id}" value="${p.image}" />
+        <div class="d-flex align-items-center flex-wrap" style="gap:8px;">
+          <img src="${p.image}" class="product-img-thumb" alt="${p.title}" />
+          <div>
+            <input type="text" class="form-control mb-1 productTitleInput" value="${p.title}" data-id="${p.id}" />
+            <input type="text" class="form-control productPriceInput" value="${p.price}" data-id="${p.id}" />
+            <input type="text" class="form-control mt-1 productImageInput" value="${p.image}" data-id="${p.id}" />
+          </div>
         </div>
-        <button class="btn btn-danger btn-sm deleteProductBtn" data-id="${p.id}">حذف</button>
+        <div class="d-flex gap-2 mt-2 mt-md-0">
+          <button class="btn btn-success btn-sm editBtn" data-id="${p.id}">ویرایش</button>
+          <button class="btn btn-danger btn-sm deleteBtn" data-id="${p.id}">حذف</button>
+        </div>
       `;
       manageProductList.appendChild(li);
     });
 
-    // اضافه کردن رویداد حذف محصول
-    document.querySelectorAll(".deleteProductBtn").forEach(btn => {
+    // دکمه‌های ویرایش
+    document.querySelectorAll(".editBtn").forEach(btn => {
       btn.onclick = e => {
         const id = parseInt(e.target.dataset.id);
-        products = products.filter(p => p.id !== id);
-        renderManageProducts();
-        showProducts();
-        alert("محصول حذف شد");
+        const title = document.querySelector(`.productTitleInput[data-id='${id}']`).value.trim();
+        const price = document.querySelector(`.productPriceInput[data-id='${id}']`).value.trim();
+        const image = document.querySelector(`.productImageInput[data-id='${id}']`).value.trim();
+        if(title && price && image) {
+          const idx = products.findIndex(p => p.id === id);
+          if(idx > -1) {
+            products[idx].title = title;
+            products[idx].price = price;
+            products[idx].image = image;
+            saveData();
+            showProducts();
+            alert("محصول ویرایش شد.");
+          }
+        } else {
+          alert("لطفا همه فیلدها را پر کنید.");
+        }
       };
     });
 
-    // اضافه کردن رویداد تغییر عنوان و قیمت و عکس (با کمی تأخیر یا روی خروج از فیلد)
-    document.querySelectorAll(".productTitleInput").forEach(input => {
-      input.onchange = e => {
+    // دکمه‌های حذف محصول
+    document.querySelectorAll(".deleteBtn").forEach(btn => {
+      btn.onclick = e => {
         const id = parseInt(e.target.dataset.id);
-        const p = products.find(p => p.id === id);
-        if(p) {
-          p.title = e.target.value;
-          showProducts();
-        }
-      };
-    });
-    document.querySelectorAll(".productPriceInput").forEach(input => {
-      input.onchange = e => {
-        const id = parseInt(e.target.dataset.id);
-        const p = products.find(p => p.id === id);
-        if(p) {
-          p.price = e.target.value;
-          showProducts();
-        }
-      };
-    });
-    document.querySelectorAll(".productImageInput").forEach(input => {
-      input.onchange = e => {
-        const id = parseInt(e.target.dataset.id);
-        const p = products.find(p => p.id === id);
-        if(p) {
-          p.image = e.target.value;
+        if(confirm("آیا مطمئنید می‌خواهید این محصول حذف شود؟")) {
+          products = products.filter(p => p.id !== id);
+          saveData();
+          renderManageProducts();
           showProducts();
         }
       };
     });
   }
 
-  // افزودن محصول جدید از فرم
-  document.getElementById("addProductBtn").onclick = () => {
+  // افزودن محصول جدید
+  document.getElementById("addProductForm").onsubmit = function(e) {
+    e.preventDefault();
     const title = document.getElementById("newTitle").value.trim();
     const price = document.getElementById("newPrice").value.trim();
     const image = document.getElementById("newImage").value.trim();
-    if(!title || !price || !image) {
-      alert("لطفا همه فیلدها را پر کنید.");
-      return;
-    }
-    const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-    products.push({id: newId, title, price, image});
-    renderManageProducts();
-    showProducts();
-    document.getElementById("newTitle").value = "";
-    document.getElementById("newPrice").value = "";
-    document.getElementById("newImage").value = "";
-  };
-
-  // ورود به پنل مدیریت با رمز عبور
-  loginBtn.onclick = () => {
-    const pass = adminPasswordInput.value;
-    if(pass === "1225") {
-      loginPanel.style.display = "none";
-      adminPanel.style.display = "block";
-      ordersSection.style.display = "block";
-      renderManageProducts();
-      renderOrders();
-      loginError.style.display = "none";
-    } else {
-      loginError.style.display = "block";
-    }
-  };
-
-  // باز کردن پنل مدیریت با کلیک روی لینک
-  adminBtn.onclick = (e) => {
-    e.preventDefault();
-    loginPanel.style.display = "block";
-    adminPanel.style.display = "none";
-    ordersSection.style.display = "none";
-  };
-
-  // خروج از مدیریت
-  logoutBtn.onclick = () => {
-    loginPanel.style.display = "block";
-    adminPanel.style.display = "none";
-    ordersSection.style.display = "none";
-    adminPasswordInput.value = "";
-  };
-
-  // شروع نمایش محصولات در صفحه فروشگاه
-  showProducts();
-
-</script>
-
-</body>
-</html>
+    if(title && price && image) {
+      const newId = products.length ? Math.max(...products.map(p => p.id)) + 1 : 1;
