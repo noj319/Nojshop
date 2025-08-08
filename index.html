@@ -1,297 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>نوژشاپ - فروشگاه لوازم آرایشی و بهداشتی</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background: #f9f9fb;
-      font-family: "Tahoma", sans-serif;
-    }
-    header {
-      background-color: #d63384;
-      color: white;
-      padding: 1rem 0;
-    }
-    footer {
-      background-color: #d63384;
-      color: white;
-      padding: 1rem 0;
-      margin-top: 2rem;
-    }
-    .product-img {
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-    .trust-logo {
-      height: 60px;
-      margin-left: 15px;
-    }
-    nav a.nav-link.active {
-      font-weight: bold;
-      color: #d63384 !important;
-    }
-    /* فرم سفارش */
-    #order-form-container {
-      display: none;
-      position: fixed;
-      z-index: 1050;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-    }
-    #order-form {
-      background: white;
-      border-radius: 12px;
-      max-width: 400px;
-      padding: 1.5rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-  </style>
-</head>
-<body>
-
-  <header class="text-center">
-    <h1>نوژشاپ</h1>
-    <p>فروشگاه آنلاین لوازم آرایشی و بهداشتی</p>
-  </header>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="#home">نوژشاپ</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-        aria-controls="navbarNav" aria-expanded="false" aria-label="نمایش فهرست">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link active" href="#home">خانه</a></li>
-          <li class="nav-item"><a class="nav-link" href="#products">محصولات</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">تماس با ما</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <main class="container my-4">
-
-    <!-- خانه -->
-    <section id="home" class="mb-5 text-center">
-      <h2>به نوژشاپ خوش آمدید!</h2>
-      <p style="max-width: 600px; margin: auto; font-size: 1.1rem; color: #555;">
-        تو نوژشاپ، ما باور داریم زیبایی حق همه‌ست.  
-        محصولات باکیفیت و تازه‌ترین برندهای آرایشی و بهداشتی رو با قیمت مناسب براتون فراهم کردیم.  
-        تیم ما همیشه آماده‌ست تا بهترین‌ها رو به دست شما برسونه و تجربه خریدی راحت و لذت‌بخش داشته باشید.  
-        با نوژشاپ، درخشش و سلامت پوست و مو رو به خودتون هدیه بدید!  
-      </p>
-    </section>
-
-    <!-- محصولات -->
-    <section id="products" class="mb-5">
-      <h2 class="mb-4 text-center">محصولات ما</h2>
-      <div class="row g-4">
-
-        <!-- محصول اول -->
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="کرم مرطوب‌کننده" />
-            <div class="card-body text-center">
-              <h5 class="card-title">کرم مرطوب‌کننده</h5>
-              <p class="card-text text-danger fw-bold">۲۵۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-name="کرم مرطوب‌کننده" data-price="250000">خرید</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- محصول دوم -->
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1600180758890-9b6b6a7ef7c9?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="رژ لب مایع" />
-            <div class="card-body text-center">
-              <h5 class="card-title">رژ لب مایع مات</h5>
-              <p class="card-text text-danger fw-bold">۱۵۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-name="رژ لب مایع مات" data-price="150000">خرید</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- محصول سوم -->
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="سرم ویتامین C" />
-            <div class="card-body text-center">
-              <h5 class="card-title">سرم ویتامین C</h5>
-              <p class="card-text text-danger fw-bold">۳۲۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-name="سرم ویتامین C" data-price="320000">خرید</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- محصول چهارم -->
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="ادو پرفیوم" />
-            <div class="card-body text-center">
-              <h5 class="card-title">ادو پرفیوم زنانه</h5>
-              <p class="card-text text-danger fw-bold">۴۰۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-name="ادو پرفیوم زنانه" data-price="400000">خرید</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- محصول پنجم -->
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1516054712743-7a2fc0e960f3?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="ماسک صورت" />
-            <div class="card-body text-center">
-              <h5 class="card-title">ماسک صورت</h5>
-              <p class="card-text text-danger fw-bold">۱۸۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-name="ماسک صورت" data-price="180000">خرید</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- محصول ششم -->
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="لاک ناخن" />
-            <div class="card-body text-center">
-              <h5 class="card-title">لاک ناخن رنگی</h5>
-              <p class="card-text text-danger fw-bold">۹۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-name="لاک ناخن رنگی" data-price="90000">خرید</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- فرم سفارش (بعد پرداخت) -->
-    <section id="order-form-container" class="d-flex">
-      <form id="order-form" autocomplete="off">
-        <h3 class="mb-3 text-center">فرم ثبت سفارش</h3>
-        <input type="hidden" id="order-product" />
-        <input type="hidden" id="order-price" />
-        <div class="mb-3">
-          <label for="customer-name" class="form-label">نام و نام خانوادگی:</label>
-          <input type="text" class="form-control" id="customer-name" required />
-        </div>
-        <div class="mb-3">
-          <label for="customer-phone" class="form-label">شماره تلفن (مثال: 09121234567):</label>
-          <input type="tel" pattern="^09\d{9}$" class="form-control" id="customer-phone" required />
-        </div>
-        <div class="mb-3">
-          <label for="customer-address" class="form-label">آدرس:</label>
-          <textarea class="form-control" id="customer-address" rows="3" required></textarea>
-        </div>
-        <div class="mb-3 text-center">
-          <small>کد سفارش شما بعد از ارسال فرم نمایش داده می‌شود، آن را نگه دارید.</small>
-        </div>
-        <button type="submit" class="btn btn-success w-100">ارسال سفارش</button>
-        <button type="button" class="btn btn-secondary w-100 mt-2" id="close-order-form">لغو</button>
-      </form>
-    </section>
-
-    <!-- تماس با ما -->
-    <section id="contact" class="mb-5 text-center">
-      <h2>تماس با ما</h2>
-      <p>برای سفارش و سوالات، در تلگرام با ما در ارتباط باشید:</p>
-      <a href="https://t.me/noj1385" target="_blank" class="btn btn-primary">آیدی تلگرام: @noj1385</a>
-    </section>
-
-  </main>
-
-  <footer class="text-center">
-    <div class="container d-flex justify-content-center align-items-center flex-wrap">
-      <img src="https://trustseal.enamad.ir/logo.aspx?id=124674&amp;Code=e5LfFkIfiWLnlq2FrP01" 
-           alt="نماد اعتماد الکترونیکی" class="trust-logo" />
-      <span>© ۲۰۲۵ نوژشاپ - تمامی حقوق محفوظ است</span>
-    </div>
-  </footer>
-
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    // باز کردن فرم سفارش با اطلاعات محصول
-    const buyButtons = document.querySelectorAll('.buy-btn');
-    const orderFormContainer = document.getElementById('order-form-container');
-    const orderForm = document.getElementById('order-form');
-    const orderProductInput = document.getElementById('order-product');
-    const orderPriceInput = document.getElementById('order-price');
-    const closeOrderFormBtn = document.getElementById('close-order-form');
-
-    buyButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // لینک پرداخت نمونه با مقدار قیمت و نام محصول در کوئری (باید لینک واقعی جایگزین شود)
-        const productName = btn.getAttribute('data-name');
-        const productPrice = btn.getAttribute('data-price');
-        const paymentUrl = `https://example.com/pay?product=${encodeURIComponent(productName)}&price=${productPrice}`;
-        
-        // باز کردن صفحه پرداخت در تب جدید
-        window.open(paymentUrl, '_blank');
-
-        // آماده‌سازی فرم سفارش با محصول و قیمت
-        orderProductInput.value = productName;
-        orderPriceInput.value = productPrice;
-
-        // نمایش فرم سفارش
-        orderFormContainer.style.display = 'flex';
-      });
-    });
-
-    // بستن فرم سفارش
-    closeOrderFormBtn.addEventListener('click', () => {
-      orderFormContainer.style.display = 'none';
-      orderForm.reset();
-    });
-
-    // ارسال فرم سفارش
-    orderForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      // تولید کد سفارش (تاریخ+زمان)
-      const now = new Date();
-      const orderCode = `NOJ-${now.getFullYear()}${(now.getMonth()+1).toString().padStart(2,'0')}${now.getDate().toString().padStart(2,'0')}-${now.getHours().toString().padStart(2,'0')}${now.getMinutes().toString().padStart(2,'0')}${now.getSeconds().toString().padStart(2,'0')}`;
-
-      // جمع‌آوری اطلاعات سفارش
-      const orderData = {
-        code: orderCode,
-        product: orderProductInput.value,
-        price: orderPriceInput.value,
-        name: document.getElementById('customer-name').value,
-        phone: document.getElementById('customer-phone').value,
-        address: document.getElementById('customer-address').value
-      };
-
-      // نمایش پیغام تایید با کد سفارش
-      alert(`سفارش شما ثبت شد!\nکد سفارش: ${orderCode}\n\nلطفا این کد را نگه دارید و بعد از پرداخت، برای پیگیری سفارش استفاده کنید.`);
-
-      // پاک کردن فرم و بستن آن
-      orderForm.reset();
-      orderFormContainer.style.display = 'none';
-
-      // اینجا باید سفارش‌ها رو ذخیره کنی (مثلاً گوگل فرم یا ارسال ایمیل)
-      console.log('اطلاعات سفارش:', orderData);
-    });
-  </script>
-
-</body>
-  </html>
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>نوژشاپ - فروشگاه لوازم آرایشی و بهداشتی</title>
@@ -304,6 +13,21 @@
   nav a.nav-link.active { font-weight: bold; color: #d63384 !important; }
   .tab-content { margin-top: 2rem; }
   .nav-tabs .nav-link { cursor: pointer; }
+  .order-list {
+    max-width: 700px;
+    margin: 2rem auto;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  }
+  .order-list h4 {
+    margin-bottom: 1rem;
+  }
+  .order-item {
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem 0;
+  }
 </style>
 </head>
 <body>
@@ -321,6 +45,9 @@
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="order-tab" data-bs-toggle="tab" data-bs-target="#order" type="button" role="tab" aria-controls="order" aria-selected="false">فرم سفارش</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="orders-list-tab" data-bs-toggle="tab" data-bs-target="#orders-list" type="button" role="tab" aria-controls="orders-list" aria-selected="false">سفارشات ثبت‌شده</button>
     </li>
   </ul>
 
@@ -433,6 +160,14 @@
       </form>
     </div>
 
+    <!-- تب نمایش سفارشات ثبت شده -->
+    <div class="tab-pane fade" id="orders-list" role="tabpanel" aria-labelledby="orders-list-tab">
+      <div class="order-list">
+        <h4>سفارشات شما</h4>
+        <div id="orders-container">هیچ سفارشی ثبت نشده است.</div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -452,6 +187,9 @@
   const priceInput = document.getElementById('price');
   const orderTabBtn = document.getElementById('order-tab');
   const productsTabBtn = document.getElementById('products-tab');
+  const ordersListTabBtn = document.getElementById('orders-list-tab');
+  const ordersContainer = document.getElementById('orders-container');
+  const orderForm = document.getElementById('order-form');
 
   buyButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -461,7 +199,7 @@
       productNameInput.value = product;
       priceInput.value = price;
 
-      // فعال کردن تب سفارش و نمایش آن
+      // نمایش تب فرم سفارش
       let tab = new bootstrap.Tab(orderTabBtn);
       tab.show();
 
@@ -472,11 +210,36 @@
     });
   });
 
-  // مدیریت ارسال فرم سفارش
-  document.getElementById('order-form').addEventListener('submit', function(e) {
+  // نمایش سفارشات ذخیره شده از localStorage
+  function loadOrders() {
+    const orders = JSON.parse(localStorage.getItem('nojshopOrders') || '[]');
+    if (orders.length === 0) {
+      ordersContainer.innerHTML = 'هیچ سفارشی ثبت نشده است.';
+      return;
+    }
+    let html = '';
+    orders.forEach((order, idx) => {
+      html += `
+        <div class="order-item">
+          <strong>سفارش شماره ${idx + 1}:</strong><br />
+          محصول: ${order.product}<br />
+          قیمت: ${order.price} تومان<br />
+          نام خریدار: ${order.customerName}<br />
+          تلفن: ${order.customerPhone}<br />
+          آدرس: ${order.customerAddress}
+        </div>
+      `;
+    });
+    ordersContainer.innerHTML = html;
+  }
+
+  // وقتی تب سفارشات زده شد، سفارشات رو بارگذاری کن
+  ordersListTabBtn.addEventListener('shown.bs.tab', loadOrders);
+
+  // ثبت سفارش جدید
+  orderForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // دریافت داده‌ها
     const customerName = document.getElementById('customer-name').value.trim();
     const customerPhone = document.getElementById('customer-phone').value.trim();
     const customerAddress = document.getElementById('customer-address').value.trim();
@@ -488,16 +251,27 @@
       return;
     }
 
-    // اینجا باید داده‌ها رو ذخیره یا ارسال کنی به سرور یا ایمیل  
-    // چون سایت ساده است، فقط نمایش پیام موفقیت می‌دیم:
-    alert(`سفارش شما ثبت شد!\nمحصول: ${product}\nقیمت: ${price}\nنام شما: ${customerName}`);
+    // ذخیره سفارش در localStorage
+    const orders = JSON.parse(localStorage.getItem('nojshopOrders') || '[]');
+    orders.push({ product, price, customerName, customerPhone, customerAddress });
+    localStorage.setItem('nojshopOrders', JSON.stringify(orders));
+
+    alert(`سفارش شما با موفقیت ثبت شد!\nمحصول: ${product}\nقیمت: ${price}\nنام شما: ${customerName}`);
 
     // پاک کردن فرم
-    this.reset();
+    orderForm.reset();
 
-    // برگشت به تب محصولات برای خرید دوباره
+    // بازگشت به تب محصولات برای خرید مجدد
     let tab = new bootstrap.Tab(productsTabBtn);
     tab.show();
+  });
+
+  // بارگذاری اولیه سفارشات در صورت باز کردن تب سفارشات پیشفرض
+  document.addEventListener('DOMContentLoaded', () => {
+    // اگر تب سفارشات پیشفرض بود:
+    if(document.getElementById('orders-list').classList.contains('show','active')){
+      loadOrders();
+    }
   });
 </script>
 
