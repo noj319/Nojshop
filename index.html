@@ -1,120 +1,34 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>نوژشاپ - فروشگاه لوازم آرایشی و بهداشتی</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
-<style>
-  body { background: #f9f9fb; font-family: "Tahoma", sans-serif; margin:0; padding:0; }
-  header { background-color: #d63384; color: white; padding: 1rem 0; position: relative; }
-  footer { background-color: #d63384; color: white; padding: 1rem 0; margin-top: 2rem; }
-  .product-img { height: 200px; object-fit: cover; border-radius: 10px; }
-  nav a.nav-link.active { font-weight: bold; color: #d63384 !important; }
-  .tab-content { margin-top: 2rem; }
-  .nav-tabs .nav-link { cursor: pointer; }
-  .order-list {
-    max-width: 700px;
-    margin: 2rem auto;
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.1);
-  }
-  .order-list h4 {
-    margin-bottom: 1rem;
-  }
-  .order-item {
-    border-bottom: 1px solid #ddd;
-    padding: 0.5rem 0;
-  }
-  /* توضیح صمیمانه */
-  #welcome-text {
-    background: white;
-    max-width: 700px;
-    margin: 2rem auto;
-    padding: 1.5rem 1rem;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(214, 51, 132, 0.3);
-    color: #444;
-    font-size: 1.1rem;
-    line-height: 1.5;
-    text-align: center;
-  }
-  /* منوی همبرگری بالا سمت راست */
-  .hamburger-menu {
-    position: absolute;
-    top: 15px;
-    left: 15px; /* چون راست چین، منو سمت چپ میذاریم */
-    cursor: pointer;
-    width: 30px;
-    height: 22px;
-    z-index: 1100;
-  }
-  .hamburger-menu div {
-    background-color: white;
-    height: 4px;
-    margin: 4px 0;
-    border-radius: 2px;
-    transition: 0.4s;
-  }
-  /* منوی کشویی */
-  .menu-dropdown {
-    display: none;
-    position: absolute;
-    top: 50px;
-    left: 15px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    min-width: 160px;
-    z-index: 1099;
-  }
-  .menu-dropdown.show {
-    display: block;
-  }
-  .menu-dropdown button {
-    width: 100%;
-    padding: 10px 16px;
-    border: none;
-    background: none;
-    text-align: right;
-    font-size: 1rem;
-    color: #d63384;
-    cursor: pointer;
-    border-bottom: 1px solid #eee;
-  }
-  .menu-dropdown button:last-child {
-    border-bottom: none;
-  }
-  .menu-dropdown button:hover {
-    background-color: #fce4ec;
-  }
-
-  /* ریسپانسیو */
-  @media (min-width: 768px) {
-    .hamburger-menu {
-      display: none;
-    }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>نوژشاپ - فروشگاه لوازم آرایشی و بهداشتی</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+  <style>
+    body { background: #f9f9fb; font-family: "Tahoma", sans-serif; margin:0; padding:0; }
+    header { background-color: #d63384; color: white; padding: 1rem 0; position: relative; text-align: center; }
+    .product-img { height: 200px; object-fit: cover; border-radius: 10px; }
+    .hamburger-menu { position: absolute; top: 15px; left: 15px; cursor: pointer; width: 30px; height: 22px; z-index: 1100; }
+    .hamburger-menu div { background-color: white; height: 4px; margin:4px 0; border-radius:2px; transition:0.4s; }
+    .menu-dropdown { display:none; position:absolute; top:50px; left:15px; background:white; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); min-width:160px; z-index:1099; }
+    .menu-dropdown.show { display:block; }
+    .menu-dropdown button { width:100%; padding:10px 16px; border:none; background:none; text-align:right; font-size:1rem; color:#d63384; cursor:pointer; border-bottom:1px solid #eee; }
+    .menu-dropdown button:last-child { border-bottom:none; }
+    .menu-dropdown button:hover { background-color:#fce4ec; }
+    #welcome-text { background:white; max-width:700px; margin:2rem auto; padding:1.5rem 1rem; border-radius:12px; box-shadow:0 0 10px rgba(214,51,132,0.3); color:#444; font-size:1.1rem; line-height:1.5; text-align:center; }
+  </style>
 </head>
 <body>
 
-<header class="text-center">
+<header>
   <h1>نوژشاپ</h1>
   <p>فروشگاه آنلاین لوازم آرایشی و بهداشتی</p>
-
-  <!-- منوی همبرگری -->
-  <div class="hamburger-menu" id="hamburger-menu" aria-label="منوی اصلی" tabindex="0" role="button" aria-expanded="false" aria-controls="menu-dropdown">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <div class="menu-dropdown" id="menu-dropdown" role="menu" aria-hidden="true">
-    <button type="button" role="menuitem" id="menu-products">محصولات</button>
-    <button type="button" role="menuitem" id="menu-order">ثبت سفارش</button>
-    <button type="button" role="menuitem" id="menu-contact">تماس با ما</button>
+  <div class="hamburger-menu" id="hamburger-menu"><div></div><div></div><div></div></div>
+  <div class="menu-dropdown" id="menu-dropdown">
+    <button id="menu-products">محصولات</button>
+    <button id="menu-order">ثبت سفارش</button>
+    <button id="menu-contact">تماس با ما</button>
   </div>
 </header>
 
@@ -126,218 +40,44 @@
 </div>
 
 <div class="container">
-
   <ul class="nav nav-tabs justify-content-center" id="mainTabs" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button" role="tab" aria-controls="products" aria-selected="true">محصولات</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="order-tab" data-bs-toggle="tab" data-bs-target="#order" type="button" role="tab" aria-controls="order" aria-selected="false">فرم سفارش</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="orders-list-tab" data-bs-toggle="tab" data-bs-target="#orders-list" type="button" role="tab" aria-controls="orders-list" aria-selected="false">سفارشات ثبت‌شده</button>
-    </li>
+    <li class="nav-item"><button class="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products">محصولات</button></li>
+    <li class="nav-item"><button class="nav-link" id="order-tab" data-bs-toggle="tab" data-bs-target="#order">فرم سفارش</button></li>
+    <li class="nav-item"><button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders-list">سفارش‌ها</button></li>
   </ul>
-
-  <div class="tab-content" id="mainTabsContent">
-
-    <div class="tab-pane fade show active" id="products" role="tabpanel" aria-labelledby="products-tab">
-      <div class="row g-4 mt-3">
-
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="کرم مرطوب‌کننده" />
-            <div class="card-body text-center">
-              <h5 class="card-title">کرم مرطوب‌کننده</h5>
-              <p class="card-text text-danger fw-bold">۲۵۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-product="کرم مرطوب‌کننده" data-price="250000">خرید</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1600180758890-9b6b6a7ef7c9?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="رژ لب مایع مات" />
-            <div class="card-body text-center">
-              <h5 class="card-title">رژ لب مایع مات</h5>
-              <p class="card-text text-danger fw-bold">۱۵۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-product="رژ لب مایع مات" data-price="150000">خرید</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="سرم ویتامین C" />
-            <div class="card-body text-center">
-              <h5 class="card-title">سرم ویتامین C</h5>
-              <p class="card-text text-danger fw-bold">۳۲۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-product="سرم ویتامین C" data-price="320000">خرید</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="ادو پرفیوم زنانه" />
-            <div class="card-body text-center">
-              <h5 class="card-title">ادو پرفیوم زنانه</h5>
-              <p class="card-text text-danger fw-bold">۴۰۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-product="ادو پرفیوم زنانه" data-price="400000">خرید</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1516054712743-7a2fc0e960f3?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="ماسک صورت" />
-            <div class="card-body text-center">
-              <h5 class="card-title">ماسک صورت</h5>
-              <p class="card-text text-danger fw-bold">۱۸۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-product="ماسک صورت" data-price="180000">خرید</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4">
-          <div class="card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400&q=60" 
-                 class="card-img-top product-img" alt="لاک ناخن رنگی" />
-            <div class="card-body text-center">
-              <h5 class="card-title">لاک ناخن رنگی</h5>
-              <p class="card-text text-danger fw-bold">۹۰,۰۰۰ تومان</p>
-              <button class="btn btn-danger buy-btn" data-product="لاک ناخن رنگی" data-price="90000">خرید</button>
-            </div>
-          </div>
-        </div>
-
+  <div class="tab-content pt-3">
+    <div class="tab-pane fade show active" id="products">
+      <div class="row g-4">
+        <div class="col-md-4"><div class="card"><img src="https://image.freepik.com/free-photo/close-up-nail-polish-bottle-drop-white-background_124788943.jpg" class="card-img-top product-img" alt="لاک ناخن رنگی"><div class="card-body text-center"><h5>لاک ناخن رنگی</h5><p class="text-danger fw-bold">۹۰,۰۰۰ تومان</p><button class="btn btn-danger buy-btn" data-product="لاک ناخن رنگی" data-price="90000">خرید</button></div></div></div>
+        <div class="col-md-4"><div class="card"><img src="https://image.alamy.com/closing-white-cream-jar-on-white-background-hd-image266320562.html" class="card-img-top product-img" alt="کرم مرطوب‌کننده"><div class="card-body text-center"><h5>کرم مرطوب‌کننده</h5><p class="text-danger fw-bold">۲۵۰,۰۰۰ تومان</p><button class="btn btn-danger buy-btn" data-product="کرم مرطوب‌کننده" data-price="250000">خرید</button></div></div></div>
+        <!-- باقی محصولات میمونن placeholder -->
       </div>
     </div>
-
-    <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">
-      <form id="order-form" autocomplete="off" class="mx-auto" style="max-width: 400px; margin-top: 30px; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-        <h3 class="mb-3 text-center">ثبت سفارش</h3>
-        <div class="mb-3">
-          <label for="product-name" class="form-label">نام محصول:</label>
-          <input type="text" class="form-control" id="product-name" readonly />
-        </div>
-        <div class="mb-3">
-          <label for="price" class="form-label">قیمت (تومان):</label>
-          <input type="text" class="form-control" id="price" readonly />
-        </div>
-        <div class="mb-3">
-          <label for="customer-name" class="form-label">نام و نام خانوادگی:</label>
-          <input type="text" class="form-control" id="customer-name" required />
-        </div>
-        <div class="mb-3">
-          <label for="customer-phone" class="form-label">شماره تلفن (مثال: 09121234567):</label>
-          <input type="tel" pattern="^09\d{9}$" class="form-control" id="customer-phone" required />
-        </div>
-        <div class="mb-3">
-          <label for="customer-address" class="form-label">آدرس:</label>
-          <textarea class="form-control" id="customer-address" rows="3" required></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="customer-postal" class="form-label">کد پستی:</label>
-          <input type="text" pattern="^\d{10}$" class="form-control" id="customer-postal" placeholder="مثال: 1234567890" required />
-        </div>
-        <button type="submit" class="btn btn-success w-100">ثبت و پرداخت</button>
-      </form>
+    <div class="tab-pane fade" id="order">
+      <!-- فرم سفارش اینجا -->
     </div>
-
-    <div class="tab-pane fade" id="orders-list" role="tabpanel" aria-labelledby="orders-list-tab">
-      <div class="order-list">
-        <h4>سفارشات شما</h4>
-        <div id="orders-container">هیچ سفارشی ثبت نشده است.</div>
-      </div>
+    <div class="tab-pane fade" id="orders-list">
+      <!-- لیست سفارش‌ها -->
     </div>
-
   </div>
 </div>
 
-<section id="contact" class="mb-5 text-center">
+<section id="contact" class="text-center my-4">
   <h2>تماس با ما</h2>
-  <p>برای سفارش و سوالات، در تلگرام با ما در ارتباط باشید:</p>
-  <a href="https://t.me/noj1385" target="_blank" class="btn btn-primary">آیدی تلگرام: @noj1385</a>
+  <a href="https://t.me/noj1385" class="btn btn-primary">تلگرام: @noj1385</a>
 </section>
-
-<footer class="text-center">
-  <div class="container d-flex justify-content-center align-items-center flex-wrap" style="padding: 10px 0; flex-direction: column;">
-    <img src="https://trustseal.enamad.ir/logo.aspx?id=124674&amp;Code=e5LfFkIfiWLnlq2FrP01" 
-         alt="نماد اعتماد الکترونیکی" style="height:60px; margin-bottom: 8px;" />
-    <span>© ۲۰۲۵ نوژشاپ - تمامی حقوق محفوظ است</span>
-  </div>
-</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  const buyButtons = document.querySelectorAll('.buy-btn');
-  const productNameInput = document.getElementById('product-name');
-  const priceInput = document.getElementById('price');
-  const orderTabBtn = document.getElementById('order-tab');
-  const productsTabBtn = document.getElementById('products-tab');
-  const ordersListTabBtn = document.getElementById('orders-list-tab');
-  const ordersContainer = document.getElementById('orders-container');
-  const orderForm = document.getElementById('order-form');
-
-  // منوی همبرگری و دکمه‌ها
-  const hamburgerMenu = document.getElementById('hamburger-menu');
-  const menuDropdown = document.getElementById('menu-dropdown');
-  const menuProducts = document.getElementById('menu-products');
-  const menuOrder = document.getElementById('menu-order');
-  const menuContact = document.getElementById('menu-contact');
-
-  // باز و بسته کردن منوی همبرگری
-  hamburgerMenu.addEventListener('click', () => {
-    const isShown = menuDropdown.classList.toggle('show');
-    hamburgerMenu.setAttribute('aria-expanded', isShown);
-  });
-
-  // بستن منو با کلیک بیرون از آن
-  document.addEventListener('click', (e) => {
-    if (!hamburgerMenu.contains(e.target) && !menuDropdown.contains(e.target)) {
-      menuDropdown.classList.remove('show');
-      hamburgerMenu.setAttribute('aria-expanded', 'false');
-    }
-  });
-
-  // رفتن به تب یا بخش مربوطه با کلیک روی گزینه‌های منو
-  menuProducts.addEventListener('click', () => {
-    let tab = new bootstrap.Tab(productsTabBtn);
-    tab.show();
-    menuDropdown.classList.remove('show');
-    hamburgerMenu.setAttribute('aria-expanded', 'false');
-  });
-  menuOrder.addEventListener('click', () => {
-    let tab = new bootstrap.Tab(orderTabBtn);
-    tab.show();
-    menuDropdown.classList.remove('show');
-    hamburgerMenu.setAttribute('aria-expanded', 'false');
-  });
-  menuContact.addEventListener('click', () => {
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-    menuDropdown.classList.remove('show');
-    hamburgerMenu.setAttribute('aria-expanded', 'false');
-  });
-
-  buyButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const product = btn.getAttribute('data-product');
-      const price = btn.getAttribute('data-price');
-      productNameInput.value = product;
-      priceInput.value = price;
-
-      let tab = new bootstrap.Tab(orderTabBtn);
-      tab.show();
-      setTimeout(() => {
-        productNameInput.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
-    });
-  });
-
-  function loadOrders() {
+const ham = document.getElementById('hamburger-menu');
+const menu = document.getElementById('menu-dropdown');
+ham.addEventListener('click',()=> menu.classList.toggle('show'));
+document.addEventListener('click',e=>{
+  if(!ham.contains(e.target)&&!menu.contains(e.target)) menu.classList.remove('show');
+});
+document.getElementById('menu-products').onclick = ()=>{new bootstrap.Tab(document.getElementById('products-tab')).show(); menu.classList.remove('show');};
+document.getElementById('menu-order').onclick = ()=>{new bootstrap.Tab(document.getElementById('order-tab')).show(); menu.classList.remove('show');};
+document.getElementById('menu-contact').onclick = ()=>{document.getElementById('contact').scrollIntoView({behavior:'smooth'}); menu.classList.remove('show');};
+</script>
+</body>
+      </html>
