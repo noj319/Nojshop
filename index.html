@@ -289,3 +289,217 @@
 
 </body>
   </html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>نوژشاپ - فروشگاه لوازم آرایشی و بهداشتی</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+<style>
+  body { background: #f9f9fb; font-family: "Tahoma", sans-serif; }
+  header { background-color: #d63384; color: white; padding: 1rem 0; }
+  footer { background-color: #d63384; color: white; padding: 1rem 0; margin-top: 2rem; }
+  .product-img { height: 200px; object-fit: cover; border-radius: 10px; }
+  nav a.nav-link.active { font-weight: bold; color: #d63384 !important; }
+  .tab-content { margin-top: 2rem; }
+  .nav-tabs .nav-link { cursor: pointer; }
+</style>
+</head>
+<body>
+
+<header class="text-center">
+  <h1>نوژشاپ</h1>
+  <p>فروشگاه آنلاین لوازم آرایشی و بهداشتی</p>
+</header>
+
+<div class="container">
+
+  <ul class="nav nav-tabs justify-content-center" id="mainTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button" role="tab" aria-controls="products" aria-selected="true">محصولات</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="order-tab" data-bs-toggle="tab" data-bs-target="#order" type="button" role="tab" aria-controls="order" aria-selected="false">فرم سفارش</button>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="mainTabsContent">
+
+    <!-- تب محصولات -->
+    <div class="tab-pane fade show active" id="products" role="tabpanel" aria-labelledby="products-tab">
+      <div class="row g-4 mt-3">
+
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm">
+            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=60" 
+                 class="card-img-top product-img" alt="کرم مرطوب‌کننده" />
+            <div class="card-body text-center">
+              <h5 class="card-title">کرم مرطوب‌کننده</h5>
+              <p class="card-text text-danger fw-bold">۲۵۰,۰۰۰ تومان</p>
+              <button class="btn btn-danger buy-btn" data-product="کرم مرطوب‌کننده" data-price="250000">خرید</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm">
+            <img src="https://images.unsplash.com/photo-1600180758890-9b6b6a7ef7c9?auto=format&fit=crop&w=400&q=60" 
+                 class="card-img-top product-img" alt="رژ لب مایع مات" />
+            <div class="card-body text-center">
+              <h5 class="card-title">رژ لب مایع مات</h5>
+              <p class="card-text text-danger fw-bold">۱۵۰,۰۰۰ تومان</p>
+              <button class="btn btn-danger buy-btn" data-product="رژ لب مایع مات" data-price="150000">خرید</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm">
+            <img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?auto=format&fit=crop&w=400&q=60" 
+                 class="card-img-top product-img" alt="سرم ویتامین C" />
+            <div class="card-body text-center">
+              <h5 class="card-title">سرم ویتامین C</h5>
+              <p class="card-text text-danger fw-bold">۳۲۰,۰۰۰ تومان</p>
+              <button class="btn btn-danger buy-btn" data-product="سرم ویتامین C" data-price="320000">خرید</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm">
+            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=60" 
+                 class="card-img-top product-img" alt="ادو پرفیوم زنانه" />
+            <div class="card-body text-center">
+              <h5 class="card-title">ادو پرفیوم زنانه</h5>
+              <p class="card-text text-danger fw-bold">۴۰۰,۰۰۰ تومان</p>
+              <button class="btn btn-danger buy-btn" data-product="ادو پرفیوم زنانه" data-price="400000">خرید</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm">
+            <img src="https://images.unsplash.com/photo-1516054712743-7a2fc0e960f3?auto=format&fit=crop&w=400&q=60" 
+                 class="card-img-top product-img" alt="ماسک صورت" />
+            <div class="card-body text-center">
+              <h5 class="card-title">ماسک صورت</h5>
+              <p class="card-text text-danger fw-bold">۱۸۰,۰۰۰ تومان</p>
+              <button class="btn btn-danger buy-btn" data-product="ماسک صورت" data-price="180000">خرید</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm">
+            <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400&q=60" 
+                 class="card-img-top product-img" alt="لاک ناخن رنگی" />
+            <div class="card-body text-center">
+              <h5 class="card-title">لاک ناخن رنگی</h5>
+              <p class="card-text text-danger fw-bold">۹۰,۰۰۰ تومان</p>
+              <button class="btn btn-danger buy-btn" data-product="لاک ناخن رنگی" data-price="90000">خرید</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- تب فرم سفارش -->
+    <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">
+      <form id="order-form" autocomplete="off" class="mx-auto" style="max-width: 400px; margin-top: 30px; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h3 class="mb-3 text-center">ثبت سفارش</h3>
+        <div class="mb-3">
+          <label for="product-name" class="form-label">نام محصول:</label>
+          <input type="text" class="form-control" id="product-name" readonly />
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">قیمت (تومان):</label>
+          <input type="text" class="form-control" id="price" readonly />
+        </div>
+        <div class="mb-3">
+          <label for="customer-name" class="form-label">نام و نام خانوادگی:</label>
+          <input type="text" class="form-control" id="customer-name" required />
+        </div>
+        <div class="mb-3">
+          <label for="customer-phone" class="form-label">شماره تلفن (مثال: 09121234567):</label>
+          <input type="tel" pattern="^09\d{9}$" class="form-control" id="customer-phone" required />
+        </div>
+        <div class="mb-3">
+          <label for="customer-address" class="form-label">آدرس:</label>
+          <textarea class="form-control" id="customer-address" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success w-100">ثبت سفارش</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<footer class="text-center">
+  <div class="container d-flex justify-content-center align-items-center flex-wrap" style="padding: 10px 0;">
+    <img src="https://trustseal.enamad.ir/logo.aspx?id=124674&amp;Code=e5LfFkIfiWLnlq2FrP01" 
+         alt="نماد اعتماد الکترونیکی" style="height:60px; margin-left:15px;" />
+    <span>© ۲۰۲۵ نوژشاپ - تمامی حقوق محفوظ است</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // وقتی روی دکمه خرید کلیک شد، تب سفارش فعال و اطلاعات پر شود
+  const buyButtons = document.querySelectorAll('.buy-btn');
+  const productNameInput = document.getElementById('product-name');
+  const priceInput = document.getElementById('price');
+  const orderTabBtn = document.getElementById('order-tab');
+  const productsTabBtn = document.getElementById('products-tab');
+
+  buyButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const product = btn.getAttribute('data-product');
+      const price = btn.getAttribute('data-price');
+
+      productNameInput.value = product;
+      priceInput.value = price;
+
+      // فعال کردن تب سفارش و نمایش آن
+      let tab = new bootstrap.Tab(orderTabBtn);
+      tab.show();
+
+      // اسکرول به فرم سفارش
+      setTimeout(() => {
+        productNameInput.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    });
+  });
+
+  // مدیریت ارسال فرم سفارش
+  document.getElementById('order-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // دریافت داده‌ها
+    const customerName = document.getElementById('customer-name').value.trim();
+    const customerPhone = document.getElementById('customer-phone').value.trim();
+    const customerAddress = document.getElementById('customer-address').value.trim();
+    const product = productNameInput.value;
+    const price = priceInput.value;
+
+    if (!customerName || !customerPhone || !customerAddress) {
+      alert('لطفا همه فیلدها را کامل کنید.');
+      return;
+    }
+
+    // اینجا باید داده‌ها رو ذخیره یا ارسال کنی به سرور یا ایمیل  
+    // چون سایت ساده است، فقط نمایش پیام موفقیت می‌دیم:
+    alert(`سفارش شما ثبت شد!\nمحصول: ${product}\nقیمت: ${price}\nنام شما: ${customerName}`);
+
+    // پاک کردن فرم
+    this.reset();
+
+    // برگشت به تب محصولات برای خرید دوباره
+    let tab = new bootstrap.Tab(productsTabBtn);
+    tab.show();
+  });
+</script>
+
+</body>
+</html>
