@@ -1,425 +1,406 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>نوژشاپ — فروشگاه لوازم آرایشی و بهداشتی</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
-  <style>
-    :root{--brand:#d63384}
-    body{font-family:tahoma, sans-serif; background:#f9f9fb; margin:0; padding-bottom:90px}
-    header{background:var(--brand);color:#fff;padding:14px 10px;text-align:center}
-    .container-main{max-width:1100px;margin:18px auto;padding:0 12px}
-    .product-img{height:200px;object-fit:cover;border-radius:10px}
-    .thumb{width:72px;height:52px;object-fit:cover;border-radius:6px;margin-left:8px}
-    footer{background:var(--brand);color:#fff;padding:12px 8px;position:fixed;left:0;right:0;bottom:0}
-    .admin-hidden{display:none}
-    .small-muted{color:#666;font-size:.95rem}
-    @media(max-width:700px){ .product-img{height:150px} .thumb{width:56px;height:44px} }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>نوژشاپ — فروشگاه لوازم آرایشی و بهداشتی</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+<style>
+  :root{--brand:#d63384}
+  body{font-family:Tahoma, sans-serif;background:#f7f7fb;margin:0;padding-bottom:100px}
+  header{background:var(--brand);color:#fff;padding:14px 10px;text-align:center}
+  .container-main{max-width:1100px;margin:18px auto;padding:0 12px}
+  .product-img{height:200px;object-fit:cover;border-radius:10px}
+  .thumb{width:72px;height:52px;object-fit:cover;border-radius:6px;margin-left:8px}
+  footer{background:var(--brand);color:#fff;padding:12px 8px;position:fixed;left:0;right:0;bottom:0}
+  .hidden{display:none}
+  .small-muted{color:#666;font-size:.95rem}
+  .card {border-radius:10px}
+  .admin-section {margin-top:18px;padding-top:10px;border-top:1px solid #eee}
+  @media(max-width:700px){ .product-img{height:150px} .thumb{width:56px;height:44px} }
+</style>
 </head>
 <body>
-  <header>
-    <h1 style="margin:0">نوژشاپ</h1>
-    <div style="font-size:0.95rem;margin-top:6px">فروشگاه لوازم آرایشی و بهداشتی</div>
-  </header>
 
-  <div class="container container-main">
-    <!-- NAV -->
-    <div class="d-flex justify-content-between align-items-center my-3">
-      <div>
-        <button id="btnHome" class="btn btn-outline-secondary btn-sm">خانه</button>
-        <button id="btnProducts" class="btn btn-outline-secondary btn-sm">محصولات</button>
-        <button id="btnContact" class="btn btn-outline-secondary btn-sm">تماس با ما</button>
-      </div>
-      <div>
-        <button id="btnAdmin" class="btn btn-danger btn-sm">مدیریت</button>
-      </div>
+<header>
+  <h1 style="margin:0">نوژشاپ</h1>
+  <div style="font-size:.95rem;margin-top:6px">فروشگاه لوازم آرایشی و بهداشتی</div>
+</header>
+
+<div class="container container-main">
+
+  <!-- NAV -->
+  <div class="d-flex justify-content-between align-items-center my-3">
+    <div>
+      <button id="btnHome" class="btn btn-outline-secondary btn-sm">خانه</button>
+      <button id="btnProducts" class="btn btn-outline-secondary btn-sm">محصولات</button>
+      <button id="btnContact" class="btn btn-outline-secondary btn-sm">تماس با ما</button>
     </div>
-
-    <!-- HOME -->
-    <section id="homeSection">
-      <div class="text-center mb-3">
-        <h3>خوش آمدی به نوژشاپ</h3>
-        <p class="small-muted">اینجا محصولات آرایشی و بهداشتی با کیفیت رو می‌تونی ببینی و سفارش بدی. برای مدیریت سایت، روی "مدیریت" کلیک کن.</p>
-      </div>
-    </section>
-
-    <!-- PRODUCTS -->
-    <section id="productsSection" class="mb-4">
-      <h4 class="mb-3">محصولات</h4>
-      <div id="productsGrid" class="row g-4"></div>
-    </section>
-
-    <!-- ORDER FORM (inline modal-like area) -->
-    <section id="orderSection" class="admin-hidden mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">فرم ثبت سفارش</h5>
-          <form id="orderForm" class="row g-2">
-            <div class="col-12 col-md-6">
-              <label class="form-label">محصول</label>
-              <input id="orderProduct" class="form-control" readonly />
-            </div>
-            <div class="col-6 col-md-3">
-              <label class="form-label">قیمت واحد (تومان)</label>
-              <input id="orderPrice" class="form-control" readonly />
-            </div>
-            <div class="col-6 col-md-3">
-              <label class="form-label">تعداد</label>
-              <input id="orderQty" type="number" min="1" value="1" class="form-control" required />
-            </div>
-
-            <div class="col-12 col-md-6">
-              <label class="form-label">نام و نام خانوادگی</label>
-              <input id="custName" class="form-control" required minlength="3" />
-            </div>
-            <div class="col-12 col-md-6">
-              <label class="form-label">شماره تماس</label>
-              <input id="custPhone" class="form-control" required pattern="^[0-9]{10,15}$" />
-            </div>
-
-            <div class="col-12">
-              <label class="form-label">آدرس کامل</label>
-              <textarea id="custAddress" class="form-control" rows="2" required minlength="5"></textarea>
-            </div>
-            <div class="col-12 col-md-6">
-              <label class="form-label">کد پستی (۱۰ رقم)</label>
-              <input id="custPostal" class="form-control" required pattern="^[0-9]{10}$" />
-            </div>
-
-            <div class="col-12 d-flex gap-2 mt-2">
-              <button type="submit" class="btn btn-success">ثبت سفارش و پرداخت</button>
-              <button type="button" id="btnCancelOrder" class="btn btn-outline-secondary">انصراف</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contactSection" class="admin-hidden mb-4 text-center">
-      <h5>تماس با ما</h5>
-      <p class="small-muted">برای سفارش و پشتیبانی در تلگرام پیام دهید: <a href="https://t.me/noj1385" target="_blank">@noj1385</a></p>
-    </section>
-
-    <!-- ADMIN SECTION -->
-    <section id="adminSection" class="admin-hidden mb-4">
-      <div id="adminLogin">
-        <h5>ورود مدیریت</h5>
-        <div class="row g-2 align-items-center">
-          <div class="col-8 col-md-6"><input id="adminPass" type="password" class="form-control" placeholder="رمز مدیریت" /></div>
-          <div class="col-4 col-md-2"><button id="adminLoginBtn" class="btn btn-primary">ورود</button></div>
-          <div class="col-12"><p id="adminMsg" class="text-danger"></p></div>
-        </div>
-      </div>
-
-      <div id="adminPanel" class="admin-hidden mt-3">
-        <h5 class="mb-2">پنل مدیریت</h5>
-
-        <!-- add product -->
-        <div class="card mb-3">
-          <div class="card-body">
-            <h6>افزودن محصول</h6>
-            <form id="addProductForm" class="row g-2 align-items-end">
-              <div class="col-12 col-md-4"><label class="form-label">نام</label><input id="pName" class="form-control" required/></div>
-              <div class="col-12 col-md-2"><label class="form-label">قیمت (تومان)</label><input id="pPrice" type="number" min="1" class="form-control" required/></div>
-              <div class="col-12 col-md-4">
-                <label class="form-label">عکس (آپلود یا لینک)</label>
-                <input id="pFile" type="file" accept="image/*" class="form-control mb-1" />
-                <input id="pLink" type="url" class="form-control" placeholder="یا لینک مستقیم عکس (اختیاری)" />
-              </div>
-              <div class="col-12 col-md-2"><button class="btn btn-success w-100" id="addProductBtn">افزودن</button></div>
-            </form>
-            <div class="form-text mt-2">اگر فایل انتخاب کنید، از فایل استفاده می‌شود (ذخیره در مرورگر). در غیر این صورت لینک استفاده می‌شود.</div>
-          </div>
-        </div>
-
-        <!-- products list (editable) -->
-        <div class="card mb-3">
-          <div class="card-body">
-            <h6>محصولات (ویرایش / حذف)</h6>
-            <ul id="adminProducts" class="list-group list-group-flush"></ul>
-          </div>
-        </div>
-
-        <!-- orders list -->
-        <div class="card mb-3">
-          <div class="card-body">
-            <h6>سفارشات ثبت‌شده</h6>
-            <ul id="adminOrders" class="list-group list-group-flush"></ul>
-          </div>
-        </div>
-
-        <div class="d-flex gap-2">
-          <button id="adminLogout" class="btn btn-secondary">خروج</button>
-          <button id="resetDefaults" class="btn btn-outline-danger">بارگذاری محصولات پیش‌فرض</button>
-        </div>
-      </div>
-    </section>
+    <div>
+      <button id="btnAdmin" class="btn btn-danger btn-sm">مدیریت</button>
+    </div>
   </div>
 
-  <footer>
-    <div class="container container-main d-flex justify-content-center align-items-center gap-3 flex-wrap">
-      <img src="https://trustseal.enamad.ir/logo.aspx?id=124674&amp;Code=e5LfFkIfiWLnlq2FrP01" alt="نماد اعتماد" style="height:44px"/>
-      <div>© ۲۰۲۵ نوژشاپ — تمامی حقوق محفوظ است</div>
+  <!-- HOME -->
+  <section id="homeSection">
+    <div class="text-center mb-3">
+      <h3>خوش آمدی به نوژشاپ</h3>
+      <p class="small-muted">محصولات با کیفیت آرایشی و بهداشتی — برای مدیریت سایت روی "مدیریت" کلیک کن.</p>
     </div>
-  </footer>
+  </section>
 
-  <script>
-  /***** تنظیمات و داده‌ها *****/
-  const ADMIN_PASS = "12251551";
-  const LS_PRODUCTS = "noj_products_v3";
-  const LS_ORDERS = "noj_orders_v3";
-  const MERCHANT_ID = "MERCHANT_ID_HERE"; // <-- این را با MerchantID زرین‌پال خودت جایگزین کن
+  <!-- PRODUCTS -->
+  <section id="productsSection" class="mb-4">
+    <h4 class="mb-3">محصولات</h4>
+    <div id="productsGrid" class="row g-4"></div>
+  </section>
 
-  const DEFAULT_PRODUCTS = [
-    {id:1, title:"کرم مرطوب‌کننده", price:250000, image:"https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=60"},
-    {id:2, title:"رژ لب مایع مات", price:150000, image:"https://images.unsplash.com/photo-1600180758890-9b6b6a7ef7c9?auto=format&fit=crop&w=800&q=60"},
-    {id:3, title:"سرم ویتامین C", price:320000, image:"https://images.unsplash.com/photo-1575936123452-b67c3203c357?auto=format&fit=crop&w=800&q=60"},
-    {id:4, title:"ادو پرفیوم زنانه", price:400000, image:"https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=60"},
-    {id:5, title:"ماسک صورت", price:180000, image:"https://images.unsplash.com/photo-1516054712743-7a2fc0e960f3?auto=format&fit=crop&w=800&q=60"},
-    {id:6, title:"لاک ناخن رنگی", price:90000, image:"https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=60"}
-  ];
-
-  let products = [];
-  let orders = [];
-  let currentProduct = null;
-
-  /* helpers */
-  const $ = id => document.getElementById(id);
-  function numberWithCommas(x){ return String(x).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
-  function escapeHtml(s){ if(s==null) return ""; return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-  /* load/save */
-  function load(){ products = JSON.parse(localStorage.getItem(LS_PRODUCTS) || "null") || DEFAULT_PRODUCTS.slice(); orders = JSON.parse(localStorage.getItem(LS_ORDERS) || "[]"); }
-  function save(){ localStorage.setItem(LS_PRODUCTS, JSON.stringify(products)); localStorage.setItem(LS_ORDERS, JSON.stringify(orders)); }
-
-  /* init */
-  load();
-
-  /* render products grid */
-  function renderProducts(){
-    const grid = $("productsGrid");
-    grid.innerHTML = "";
-    products.forEach(p=>{
-      const col = document.createElement("div");
-      col.className = "col-12 col-md-4";
-      col.innerHTML = `
-        <div class="card h-100">
-          <img src="${escapeHtml(p.image)}" class="card-img-top product-img" alt="${escapeHtml(p.title)}" onerror="this.src='https://via.placeholder.com/800x600?text=No+Image'"/>
-          <div class="card-body text-center">
-            <h5 class="card-title">${escapeHtml(p.title)}</h5>
-            <p class="text-danger fw-bold">${numberWithCommas(p.price)} تومان</p>
-            <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-success btn-sm buy-btn" data-id="${p.id}">خرید</button>
-            </div>
+  <!-- ORDER FORM (inline) -->
+  <section id="orderSection" class="hidden mb-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">فرم ثبت سفارش</h5>
+        <form id="orderForm" class="row g-2">
+          <div class="col-12 col-md-6">
+            <label class="form-label">محصول</label>
+            <input id="orderProduct" class="form-control" readonly />
           </div>
-        </div>`;
-      grid.appendChild(col);
-    });
-    grid.querySelectorAll(".buy-btn").forEach(b=>b.addEventListener("click", e=> startOrder(Number(e.currentTarget.dataset.id))));
-  }
+          <div class="col-6 col-md-3">
+            <label class="form-label">قیمت واحد (تومان)</label>
+            <input id="orderPrice" class="form-control" readonly />
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label">تعداد</label>
+            <input id="orderQty" type="number" min="1" value="1" class="form-control" required />
+          </div>
 
-  /* start order: show form with selected product */
-  function startOrder(id){
-    currentProduct = products.find(x=>x.id===id);
-    if(!currentProduct){ alert("محصول پیدا نشد"); return; }
-    $("orderProduct").value = currentProduct.title;
-    $("orderPrice").value = currentProduct.price;
-    $("orderQty").value = 1;
-    $("custName").value = "";
-    $("custPhone").value = "";
-    $("custAddress").value = "";
-    $("custPostal").value = "";
-    $("orderSection").classList.remove("admin-hidden");
-    $("orderSection").scrollIntoView({behavior:"smooth"});
-  }
+          <div class="col-12 col-md-6">
+            <label class="form-label">نام و نام خانوادگی</label>
+            <input id="custName" class="form-control" required minlength="3" />
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label">شماره تماس</label>
+            <input id="custPhone" class="form-control" required pattern="^[0-9]{10,15}$" />
+          </div>
 
-  /* cancel order */
-  $("btnCancelOrder")?.addEventListener("click", ()=> $("orderSection").classList.add("admin-hidden"));
+          <div class="col-12">
+            <label class="form-label">آدرس کامل</label>
+            <textarea id="custAddress" class="form-control" rows="2" required minlength="5"></textarea>
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label">کد پستی (۱۰ رقم)</label>
+            <input id="custPostal" class="form-control" required pattern="^[0-9]{10}$" />
+          </div>
 
-  /* submit order: validate, save, redirect to Zarinpal StartPay */
-  $("orderForm").addEventListener("submit", function(e){
-    e.preventDefault();
-    if(!currentProduct){ alert("محصول انتخاب نشده"); return; }
-    const qty = parseInt($("orderQty").value) || 0;
-    if(qty < 1){ alert("تعداد باید حداقل 1 باشد"); return; }
-    const name = $("custName").value.trim();
-    const phone = $("custPhone").value.trim();
-    const address = $("custAddress").value.trim();
-    const postal = $("custPostal").value.trim();
-    if(name.length < 3){ alert("نام باید حداقل ۳ حرف باشد"); return; }
-    if(!/^[0-9]{10,15}$/.test(phone)){ alert("شماره تماس معتبر نیست"); return; }
-    if(address.length < 5){ alert("آدرس کامل را وارد کنید"); return; }
-    if(!/^[0-9]{10}$/.test(postal)){ alert("کد پستی باید ۱۰ رقم باشد"); return; }
-    const total = currentProduct.price * qty;
+          <div class="col-12 d-flex gap-2 mt-2">
+            <button type="submit" class="btn btn-success">ثبت سفارش و پرداخت</button>
+            <button type="button" id="btnCancelOrder" class="btn btn-outline-secondary">انصراف</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
 
-    const order = {
-      id: Date.now(),
-      productId: currentProduct.id,
-      productTitle: currentProduct.title,
-      unitPrice: currentProduct.price,
-      qty, total,
-      name, phone, address, postal,
-      created: new Date().toISOString()
-    };
-    orders.push(order);
-    save();
-    alert(`سفارش ثبت شد — جمع ${numberWithCommas(total)} تومان. به صفحه پرداخت هدایت می‌شوید.`);
-    // open Zarinpal StartPay (note: proper integration requires server-side)
-    const description = encodeURIComponent(`خرید ${qty}x ${currentProduct.title} — نوژشاپ`);
-    const amount = total;
-    const paymentUrl = `https://www.zarinpal.com/pg/StartPay/${MERCHANT_ID}?amount=${amount}&description=${description}`;
-    window.open(paymentUrl, "_blank");
-    $("orderSection").classList.add("admin-hidden");
-    renderAdminOrders();
+  <!-- CONTACT -->
+  <section id="contactSection" class="hidden mb-4 text-center">
+    <h5>تماس با ما</h5>
+    <p class="small-muted">تلگرام: <a href="https://t.me/noj1385" target="_blank">@noj1385</a></p>
+  </section>
+
+  <!-- ADMIN (separate area) -->
+  <section id="adminSection" class="admin-section">
+    <div id="adminLogin" class="">
+      <h5>ورود مدیریت</h5>
+      <div class="row g-2 align-items-center">
+        <div class="col-8 col-md-6"><input id="adminPass" type="password" class="form-control" placeholder="رمز مدیریت" /></div>
+        <div class="col-4 col-md-2"><button id="adminLoginBtn" class="btn btn-primary">ورود</button></div>
+        <div class="col-12"><p id="adminMsg" class="text-danger"></p></div>
+      </div>
+    </div>
+
+    <div id="adminPanel" class="hidden mt-3">
+      <h5>پنل مدیریت</h5>
+
+      <!-- add product -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h6>افزودن محصول</h6>
+          <form id="addProductForm" class="row g-2 align-items-end">
+            <div class="col-12 col-md-4"><label class="form-label">نام</label><input id="pName" class="form-control" required/></div>
+            <div class="col-12 col-md-2"><label class="form-label">قیمت (تومان)</label><input id="pPrice" type="number" min="1" class="form-control" required/></div>
+            <div class="col-12 col-md-4">
+              <label class="form-label">عکس (آپلود یا لینک)</label>
+              <input id="pFile" type="file" accept="image/*" class="form-control mb-1" />
+              <input id="pLink" type="url" class="form-control" placeholder="یا لینک مستقیم عکس (اختیاری)" />
+            </div>
+            <div class="col-12 col-md-2"><button class="btn btn-success w-100" id="addProductBtn">افزودن</button></div>
+          </form>
+          <div class="form-text mt-2">اگر فایل انتخاب کنید، از فایل استفاده می‌شود و در مرورگر ذخیره می‌شود.</div>
+        </div>
+      </div>
+
+      <!-- products list -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h6>محصولات (ویرایش / حذف)</h6>
+          <ul id="adminProducts" class="list-group list-group-flush"></ul>
+        </div>
+      </div>
+
+      <!-- orders list -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h6>سفارشات ثبت‌شده</h6>
+          <ul id="adminOrders" class="list-group list-group-flush"></ul>
+        </div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button id="adminLogout" class="btn btn-secondary">خروج</button>
+        <button id="resetDefaults" class="btn btn-outline-danger">بارگذاری محصولات پیش‌فرض</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container container-main d-flex justify-content-center align-items-center gap-3 flex-wrap">
+    <img src="https://trustseal.enamad.ir/logo.aspx?id=124674&amp;Code=e5LfFkIfiWLnlq2FrP01" alt="نماد" style="height:44px"/>
+    <div>© ۲۰۲۵ نوژشاپ — تمامی حقوق محفوظ است</div>
+  </div>
+</footer>
+
+<script>
+/* ====== تنظیمات ====== */
+const ADMIN_PASS = "12251551";
+const LS_PRODUCTS = "noj_products_final";
+const LS_ORDERS = "noj_orders_final";
+const MERCHANT_ID = "MERCHANT_ID_HERE"; // <-- این را با MerchantID زرین پال خودت جایگزین کن
+
+/* محصولات پیش‌فرض (۶ تا) */
+const DEFAULT_PRODUCTS = [
+  {id:1, title:"کرم مرطوب‌کننده", price:250000, image:"https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=60"},
+  {id:2, title:"رژ لب مایع مات", price:150000, image:"https://images.unsplash.com/photo-1600180758890-9b6b6a7ef7c9?auto=format&fit=crop&w=800&q=60"},
+  {id:3, title:"سرم ویتامین C", price:320000, image:"https://images.unsplash.com/photo-1575936123452-b67c3203c357?auto=format&fit=crop&w=800&q=60"},
+  {id:4, title:"ادو پرفیوم زنانه", price:400000, image:"https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=60"},
+  {id:5, title:"ماسک صورت", price:180000, image:"https://images.unsplash.com/photo-1516054712743-7a2fc0e960f3?auto=format&fit=crop&w=800&q=60"},
+  {id:6, title:"لاک ناخن رنگی", price:90000, image:"https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=60"}
+];
+
+/* state */
+let products = [];
+let orders = [];
+let currentProduct = null;
+
+/* helpers */
+const $ = id => document.getElementById(id);
+function num(x){ return String(x).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+function esc(s){ if(s==null) return ""; return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function fileToDataURL(file){ return new Promise((res,rej)=>{ const fr=new FileReader(); fr.onload=()=>res(fr.result); fr.onerror=()=>rej(); fr.readAsDataURL(file); }); }
+
+/* load/save */
+function load(){ products = JSON.parse(localStorage.getItem(LS_PRODUCTS) || "null") || DEFAULT_PRODUCTS.slice(); orders = JSON.parse(localStorage.getItem(LS_ORDERS) || "[]"); }
+function save(){ localStorage.setItem(LS_PRODUCTS, JSON.stringify(products)); localStorage.setItem(LS_ORDERS, JSON.stringify(orders)); }
+
+/* initial */
+load();
+
+/* render products */
+function renderProducts(){
+  const grid = $("productsGrid"); grid.innerHTML = "";
+  products.forEach(p=>{
+    const col = document.createElement("div"); col.className="col-12 col-md-4";
+    col.innerHTML = `
+      <div class="card h-100 shadow-sm">
+        <img src="${esc(p.image)}" class="card-img-top product-img" alt="${esc(p.title)}" onerror="this.src='https://via.placeholder.com/800x600?text=No+Image'"/>
+        <div class="card-body text-center">
+          <h5 class="card-title">${esc(p.title)}</h5>
+          <p class="text-danger fw-bold">${num(p.price)} تومان</p>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-success btn-sm buy-btn" data-id="${p.id}">خرید</button>
+          </div>
+        </div>
+      </div>`;
+    grid.appendChild(col);
   });
+  grid.querySelectorAll(".buy-btn").forEach(b=> b.addEventListener("click", e=> startOrder(Number(e.currentTarget.dataset.id))));
+}
 
-  /* admin: login */
-  $("adminLoginBtn").addEventListener("click", ()=>{
-    const p = $("adminPass").value || "";
-    if(p === ADMIN_PASS){
-      $("adminLogin").classList.add("admin-hidden");
-      $("adminPanel").classList.remove("admin-hidden");
-      $("adminMsg").textContent = "";
-      $("adminSection").scrollIntoView({behavior:"smooth"});
-      renderAdminProducts(); renderAdminOrders();
-    } else {
-      $("adminMsg").textContent = "رمز اشتباه است.";
-    }
-    $("adminPass").value = "";
-  });
+/* start order */
+function startOrder(id){
+  currentProduct = products.find(x=>x.id===id);
+  if(!currentProduct){ alert("محصول پیدا نشد"); return; }
+  $("orderProduct").value = currentProduct.title;
+  $("orderPrice").value = currentProduct.price;
+  $("orderQty").value = 1;
+  $("custName").value = ""; $("custPhone").value=""; $("custAddress").value=""; $("custPostal").value="";
+  $("orderSection").classList.remove("hidden");
+  $("orderSection").scrollIntoView({behavior:"smooth"});
+}
 
-  /* admin: logout */
-  $("adminLogout").addEventListener("click", ()=>{
-    $("adminPanel").classList.add("admin-hidden");
-    $("adminLogin").classList.remove("admin-hidden");
+/* cancel order */
+$("btnCancelOrder").addEventListener("click", ()=> $("orderSection").classList.add("hidden"));
+
+/* submit order -> validate, save, redirect to Zarinpal StartPay */
+$("orderForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  if(!currentProduct){ alert("محصول انتخاب نشده"); return; }
+  const qty = parseInt($("orderQty").value) || 0;
+  if(qty < 1){ alert("تعداد باید حداقل 1 باشد"); return; }
+  const name = $("custName").value.trim();
+  const phone = $("custPhone").value.trim();
+  const address = $("custAddress").value.trim();
+  const postal = $("custPostal").value.trim();
+  if(name.length < 3){ alert("نام باید حداقل ۳ حرف باشد"); return; }
+  if(!/^[0-9]{10,15}$/.test(phone)){ alert("شماره تماس معتبر نیست"); return; }
+  if(address.length < 5){ alert("آدرس کامل را وارد کنید"); return; }
+  if(!/^[0-9]{10}$/.test(postal)){ alert("کد پستی باید ۱۰ رقم باشد"); return; }
+
+  const total = currentProduct.price * qty;
+  const order = {
+    id: Date.now(), productId: currentProduct.id, productTitle: currentProduct.title,
+    unitPrice: currentProduct.price, qty, total, name, phone, address, postal, created: new Date().toISOString()
+  };
+  orders.push(order); save();
+  alert(`سفارش ثبت شد — جمع ${num(total)} تومان. به صفحه پرداخت هدایت می‌شوید.`);
+  // redirect to Zarinpal (StartPay placeholder). Replace MERCHANT_ID with your actual merchant id.
+  const description = encodeURIComponent(`خرید ${qty}x ${currentProduct.title} — نوژشاپ`);
+  const paymentUrl = `https://www.zarinpal.com/pg/StartPay/${MERCHANT_ID}?amount=${total}&description=${description}`;
+  window.open(paymentUrl, "_blank");
+  $("orderSection").classList.add("hidden");
+  renderAdminOrders();
+});
+
+/* ADMIN: handlers */
+$("btnAdmin").addEventListener("click", ()=> { $("adminSection").scrollIntoView({behavior:"smooth"}); $("adminPass").focus(); });
+
+$("adminLoginBtn").addEventListener("click", ()=>{
+  const val = $("adminPass").value || "";
+  if(val === ADMIN_PASS){
+    $("adminLogin").classList.add("hidden");
+    $("adminPanel").classList.remove("hidden");
     $("adminMsg").textContent = "";
-  });
-
-  /* add product: handle file or link */
-  $("addProductBtn").addEventListener("click", async (ev)=>{
-    ev.preventDefault();
-    const name = $("pName").value.trim();
-    const price = Number($("pPrice").value);
-    const file = $("pFile").files && $("pFile").files[0];
-    const link = $("pLink").value.trim();
-    if(!name || !price || (!file && !link)){ alert("لطفا نام، قیمت و تصویر (آپلود یا لینک) را وارد کنید."); return; }
-    let image = "";
-    if(file){
-      try { image = await fileToDataURL(file); }
-      catch(err){ alert("خطا در خواندن فایل تصویر"); return; }
-    } else image = link;
-    const newId = products.length ? Math.max(...products.map(x=>x.id))+1 : 1;
-    products.push({id:newId, title:name, price, image});
-    save(); renderProducts(); renderAdminProducts();
-    $("pName").value = ""; $("pPrice").value=""; $("pFile").value=""; $("pLink").value="";
-    alert("محصول اضافه شد.");
-  });
-
-  /* file -> dataURL */
-  function fileToDataURL(file){
-    return new Promise((res, rej)=>{
-      const fr = new FileReader();
-      fr.onload = ()=> res(fr.result);
-      fr.onerror = ()=> rej(new Error("File read error"));
-      fr.readAsDataURL(file);
-    });
+    renderAdminProducts(); renderAdminOrders();
+    $("adminPanel").scrollIntoView({behavior:"smooth"});
+  } else {
+    $("adminMsg").textContent = "رمز اشتباه است.";
   }
+  $("adminPass").value = "";
+});
 
-  /* render admin products list (editable) */
-  function renderAdminProducts(){
-    const ul = $("adminProducts");
-    ul.innerHTML = "";
-    if(!products.length){ ul.innerHTML = "<li class='list-group-item text-center'>محصولی وجود ندارد</li>"; return; }
-    products.forEach(p=>{
-      const li = document.createElement("li");
-      li.className = "list-group-item";
-      li.innerHTML = `
-        <div class="d-flex gap-3 align-items-start">
-          <img src="${escapeHtml(p.image)}" class="thumb" onerror="this.src='https://via.placeholder.com/150x100?text=No+Image'"/>
-          <div style="flex:1">
-            <input class="form-control mb-1 prod-title" data-id="${p.id}" value="${escapeHtml(p.title)}"/>
-            <input class="form-control mb-1 prod-price" data-id="${p.id}" type="number" min="1" value="${p.price}"/>
-            <div class="d-flex gap-2">
-              <input class="form-control prod-link" data-id="${p.id}" placeholder="یا لینک تصویر" value="${escapeHtml(p.image)}"/>
-              <input class="form-control form-control-sm prod-file" data-id="${p.id}" type="file" accept="image/*"/>
-            </div>
+$("adminLogout").addEventListener("click", ()=>{
+  $("adminPanel").classList.add("hidden");
+  $("adminLogin").classList.remove("hidden");
+});
+
+/* Add product: file or link */
+$("addProductBtn").addEventListener("click", async function(ev){
+  ev.preventDefault();
+  const name = $("pName").value.trim();
+  const price = Number($("pPrice").value);
+  const file = $("pFile").files && $("pFile").files[0];
+  const link = $("pLink").value.trim();
+  if(!name || !price || (!file && !link)){ alert("لطفا نام، قیمت و تصویر (آپلود یا لینک) را وارد کنید."); return; }
+  let image = "";
+  if(file){
+    try{ image = await fileToDataURL(file); } catch(err){ alert("خطا در خواندن فایل"); return; }
+  } else image = link;
+  const newId = products.length ? Math.max(...products.map(x=>x.id))+1 : 1;
+  products.push({id:newId, title:name, price, image});
+  save(); renderProducts(); renderAdminProducts();
+  $("pName").value=""; $("pPrice").value=""; $("pFile").value=""; $("pLink").value="";
+  alert("محصول اضافه شد.");
+});
+
+/* render admin products */
+function renderAdminProducts(){
+  const ul = $("adminProducts"); ul.innerHTML = "";
+  if(!products.length){ ul.innerHTML = "<li class='list-group-item text-center'>محصولی وجود ندارد</li>"; return; }
+  products.forEach(p=>{
+    const li = document.createElement("li"); li.className="list-group-item";
+    li.innerHTML = `
+      <div class="d-flex gap-3 align-items-start">
+        <img src="${esc(p.image)}" class="thumb" onerror="this.src='https://via.placeholder.com/150x100?text=No+Image'"/>
+        <div style="flex:1">
+          <input class="form-control mb-1 prod-title" data-id="${p.id}" value="${esc(p.title)}"/>
+          <input class="form-control mb-1 prod-price" data-id="${p.id}" type="number" min="1" value="${p.price}"/>
+          <div class="d-flex gap-2">
+            <input class="form-control prod-link" data-id="${p.id}" placeholder="یا لینک تصویر" value="${esc(p.image)}"/>
+            <input class="form-control form-control-sm prod-file" data-id="${p.id}" type="file" accept="image/*"/>
           </div>
-          <div class="d-flex flex-column gap-2">
-            <button class="btn btn-sm btn-success save-prod" data-id="${p.id}">ذخیره</button>
-            <button class="btn btn-sm btn-danger del-prod" data-id="${p.id}">حذف</button>
-          </div>
-        </div>`;
-      ul.appendChild(li);
-    });
-
-    ul.querySelectorAll(".del-prod").forEach(b=> b.addEventListener("click", (e)=>{
-      const id = Number(e.currentTarget.dataset.id);
-      if(!confirm("آیا از حذف محصول مطمئن هستید؟")) return;
-      products = products.filter(x=>x.id !== id);
-      save(); renderProducts(); renderAdminProducts();
-    }));
-
-    ul.querySelectorAll(".save-prod").forEach(b=> b.addEventListener("click", async (e)=>{
-      const id = Number(e.currentTarget.dataset.id);
-      const titleEl = ul.querySelector(`.prod-title[data-id='${id}']`);
-      const priceEl = ul.querySelector(`.prod-price[data-id='${id}']`);
-      const linkEl = ul.querySelector(`.prod-link[data-id='${id}']`);
-      const fileEl = ul.querySelector(`.prod-file[data-id='${id}']`);
-      const title = titleEl.value.trim();
-      const price = Number(priceEl.value);
-      if(!title || !price){ alert("عنوان و قیمت را وارد کنید"); return; }
-      let image = linkEl.value.trim();
-      if(fileEl.files && fileEl.files[0]){ try{ image = await fileToDataURL(fileEl.files[0]); } catch(err){ alert("خطا در خواندن فایل"); return; } }
-      const idx = products.findIndex(x=>x.id===id);
-      if(idx>-1){ products[idx].title = title; products[idx].price = price; products[idx].image = image; save(); renderProducts(); renderAdminProducts(); alert("ذخیره شد"); }
-    }));
-  }
-
-  /* render admin orders */
-  function renderAdminOrders(){
-    const ul = $("adminOrders");
-    ul.innerHTML = "";
-    if(!orders.length){ ul.innerHTML = "<li class='list-group-item text-center'>سفارشی ثبت نشده</li>"; return; }
-    orders.slice().reverse().forEach(o=>{
-      const li = document.createElement("li");
-      li.className = "list-group-item";
-      li.innerHTML = `
-        <div><b>${escapeHtml(o.productTitle)}</b> — تعداد: ${o.qty} — مبلغ کل: ${numberWithCommas(o.total)} تومان</div>
-        <div class="small-muted">نام: ${escapeHtml(o.name)} — تلفن: ${escapeHtml(o.phone)}</div>
-        <div class="small-muted">آدرس: ${escapeHtml(o.address)} — کد پستی: ${escapeHtml(o.postal)}</div>
-        <div class="d-flex justify-content-end mt-2">
-          <button class="btn btn-sm btn-danger del-order" data-id="${o.id}">حذف سفارش</button>
-        </div>`;
-      ul.appendChild(li);
-    });
-    ul.querySelectorAll(".del-order").forEach(b=> b.addEventListener("click", (e)=>{
-      const id = Number(e.currentTarget.dataset.id);
-      if(!confirm("آیا از حذف این سفارش مطمئن هستید؟")) return;
-      orders = orders.filter(x=>x.id!==id); save(); renderAdminOrders();
-    }));
-  }
-
-  /* reset to defaults */
-  $("resetDefaults").addEventListener("click", ()=>{
-    if(!confirm("محصولات فعلی حذف و محصولات پیش‌فرض بارگذاری شوند؟")) return;
-    products = DEFAULT_PRODUCTS.slice(); save(); renderProducts(); renderAdminProducts();
+        </div>
+        <div class="d-flex flex-column gap-2">
+          <button class="btn btn-sm btn-success save-prod" data-id="${p.id}">ذخیره</button>
+          <button class="btn btn-sm btn-danger del-prod" data-id="${p.id}">حذف</button>
+        </div>
+      </div>`;
+    ul.appendChild(li);
   });
 
-  /* nav buttons */
-  $("btnHome").addEventListener("click", ()=> window.scrollTo({top:0, behavior:"smooth"}));
-  $("btnProducts").addEventListener("click", ()=> { $("productsSection").scrollIntoView({behavior:"smooth"}); });
-  $("btnContact").addEventListener("click", ()=> { $("contactSection").scrollIntoView({behavior:"smooth"}); });
-  $("btnAdmin").addEventListener("click", ()=> { $("adminSection").scrollIntoView({behavior:"smooth"}); $("adminPass").focus(); });
+  /* attach delete */
+  ul.querySelectorAll(".del-prod").forEach(b => b.addEventListener("click", (e)=>{
+    const id = Number(e.currentTarget.dataset.id);
+    if(!confirm("آیا از حذف محصول مطمئن هستید؟")) return;
+    products = products.filter(x=>x.id!==id); save(); renderProducts(); renderAdminProducts();
+  }));
 
-  /* initial render */
-  renderProducts(); renderAdminProducts(); renderAdminOrders();
+  /* attach save */
+  ul.querySelectorAll(".save-prod").forEach(b => b.addEventListener("click", async (e)=>{
+    const id = Number(e.currentTarget.dataset.id);
+    const container = e.currentTarget.closest("li");
+    const titleEl = container.querySelector(`.prod-title[data-id='${id}']`);
+    const priceEl = container.querySelector(`.prod-price[data-id='${id}']`);
+    const linkEl  = container.querySelector(`.prod-link[data-id='${id}']`);
+    const fileEl  = container.querySelector(`.prod-file[data-id='${id}']`);
+    const title = titleEl.value.trim();
+    const price = Number(priceEl.value);
+    if(!title || !price){ alert("عنوان و قیمت را وارد کنید"); return; }
+    let image = linkEl.value.trim();
+    if(fileEl.files && fileEl.files[0]){ try{ image = await fileToDataURL(fileEl.files[0]); } catch(err){ alert("خطا در خواندن فایل"); return; } }
+    const idx = products.findIndex(x=>x.id===id);
+    if(idx>-1){ products[idx].title = title; products[idx].price = price; products[idx].image = image; save(); renderProducts(); renderAdminProducts(); alert("ذخیره شد"); }
+  }));
+}
 
-  /* save on unload */
-  window.addEventListener("beforeunload", ()=> save());
+/* render admin orders */
+function renderAdminOrders(){
+  const ul = $("adminOrders"); ul.innerHTML = "";
+  if(!orders.length){ ul.innerHTML = "<li class='list-group-item text-center'>سفارشی ثبت نشده</li>"; return; }
+  orders.slice().reverse().forEach(o=>{
+    const li = document.createElement("li"); li.className="list-group-item";
+    li.innerHTML = `
+      <div><b>${esc(o.productTitle)}</b> — تعداد: ${o.qty} — مبلغ: ${num(o.total)} تومان</div>
+      <div class="small-muted">نام: ${esc(o.name)} — تلفن: ${esc(o.phone)}</div>
+      <div class="small-muted">آدرس: ${esc(o.address)} — کدپستی: ${esc(o.postal)}</div>
+      <div class="d-flex justify-content-end mt-2"><button class="btn btn-sm btn-danger del-order" data-id="${o.id}">حذف سفارش</button></div>`;
+    ul.appendChild(li);
+  });
+  ul.querySelectorAll(".del-order").forEach(b => b.addEventListener("click", (e)=>{
+    const id = Number(e.currentTarget.dataset.id);
+    if(!confirm("آیا از حذف این سفارش مطمئن هستید؟")) return;
+    orders = orders.filter(x=>x.id!==id); save(); renderAdminOrders();
+  }));
+}
 
-  </script>
+/* reset to defaults */
+$("resetDefaults").addEventListener("click", ()=>{
+  if(!confirm("محصولات فعلی حذف و پیش‌فرض بارگذاری شود؟")) return;
+  products = DEFAULT_PRODUCTS.slice(); save(); renderProducts(); renderAdminProducts();
+});
+
+/* nav */
+$("btnHome").addEventListener("click", ()=> window.scrollTo({top:0,behavior:"smooth"}));
+$("btnProducts").addEventListener("click", ()=> $("productsSection").scrollIntoView({behavior:"smooth"}));
+$("btnContact").addEventListener("click", ()=> { $("contactSection").classList.remove("hidden"); $("contactSection").scrollIntoView({behavior:"smooth"}); });
+
+/* initial render */
+renderProducts();
+renderAdminProducts();
+renderAdminOrders();
+
+/* save on unload */
+window.addEventListener("beforeunload", ()=> save());
+</script>
 </body>
-  </html>
+      </html>
